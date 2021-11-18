@@ -18,7 +18,7 @@ public class DamageAction : ActionParameter
     override void childInit()
     {
         damageClass = (ClassModifier)(actionDetail1);
-        criticalModifier = (CriticalModifier)((int)actionValue5.value);
+        criticalModifier = (int)actionValue5.value == 1 ? CriticalModifier.critical : CriticalModifier.normal;
 
         switch (damageClass)
         {

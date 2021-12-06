@@ -14,7 +14,61 @@ namespace ActionParameterSerializer
     {
         public double getItem(PropertyKey? key)
         {
-            return 0;
+            switch (key)
+            {
+                case PropertyKey.atk:
+                    return this.atk;
+                case PropertyKey.def:
+                    return this.def;
+
+                case PropertyKey.dodge:
+                    return this.dodge;
+
+                case PropertyKey.energyRecoveryRate:
+                    return this.energyRecoveryRate;
+
+                case PropertyKey.energyReduceRate:
+                    return this.energyReduceRate;
+
+                case PropertyKey.hp:
+                    return this.hp;
+
+                case PropertyKey.hpRecoveryRate:
+                    return this.hpRecoveryRate;
+
+                case PropertyKey.lifeSteal:
+                    return this.lifeSteal;
+
+                case PropertyKey.magicCritical:
+                    return this.magicCritical;
+
+                case PropertyKey.magicDef:
+                    return this.magicDef;
+
+                case PropertyKey.magicPenetrate:
+                    return this.magicPenetrate;
+
+                case PropertyKey.magicStr:
+                    return this.magicStr;
+
+                case PropertyKey.physicalCritical:
+                    return this.physicalCritical;
+
+                case PropertyKey.physicalPenetrate:
+                    return this.physicalPenetrate;
+
+                case PropertyKey.waveEnergyRecovery:
+                    return this.waveEnergyRecovery;
+
+                case PropertyKey.waveHpRecovery:
+                    return this.waveHpRecovery;
+
+                case PropertyKey.accuracy:
+                    return this.accuracy;
+
+                default:
+                    return 0;
+            }
         }
 
         public static Property getPropertyWithKeyAndValue(Property property, PropertyKey key, double value)
@@ -118,8 +172,10 @@ namespace ActionParameterSerializer
         public const int EXPRESSION_VALUE = 2;
         public int getExpression()
         {
-            return EXPRESSION_EXPRESSION;
+            return expression;
         }
+
+        public static int expression = EXPRESSION_ORIGINAL;
 
         public static UserSettings get()
         {

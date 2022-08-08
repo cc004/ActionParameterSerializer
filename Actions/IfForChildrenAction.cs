@@ -113,11 +113,11 @@ public class IfForChildrenAction : ActionParameter
                 || (actionDetail1 >= 6000 && actionDetail1 < 7000))
         {
             if (trueClause != null && falseClause != null)
-                return Utils.JavaFormat(Utils.GetString("Condition_s, trueClause + falseClause"));
+                return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause + falseClause);
             else if (trueClause != null)
-                return Utils.JavaFormat(Utils.GetString("Condition_s, trueClause"));
+                return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause);
             else if (falseClause != null)
-                return Utils.JavaFormat(Utils.GetString("Condition_s, falseClause"));
+                return Utils.JavaFormat(Utils.GetString("Condition_s"), falseClause);
         }
         else if (actionDetail1 >= 0 && actionDetail1 < 100)
         {

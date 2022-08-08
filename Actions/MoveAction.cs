@@ -20,8 +20,13 @@ public class MoveAction : ActionParameter
         absoluteWithoutDirection = 7
     }
 
-    private readonly MoveType moveType;
+    private MoveType moveType;
 
+    public
+    override void childInit()
+    {
+        moveType = (MoveType)actionDetail1;
+    }
     public
     override string localizedDetail(int level, Property property)
     {

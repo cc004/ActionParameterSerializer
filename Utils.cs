@@ -530,6 +530,8 @@ namespace ActionParameterSerializer
                     return Utils.JavaFormat(Utils.GetString("the_highest_ATK_or_Magic_STR"));
                 case TargetType.bothAtkAscending:
                     return Utils.JavaFormat(Utils.GetString("the_lowest_ATK_or_Magic_STR"));
+                case TargetType.energyAscBackWithoutOwner:
+                    return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"));
                 default:
                     return "";
             }
@@ -599,6 +601,8 @@ namespace ActionParameterSerializer
                     return Utils.JavaFormat(Utils.GetString("s_the_highest_ATK_or_Magic_STR"), localizedModifier);
                 case TargetType.bothAtkAscending:
                     return Utils.JavaFormat(Utils.GetString("s_the_lowest_ATK_or_Magic_STR"), localizedModifier);
+                case TargetType.energyAscBackWithoutOwner:
+                    return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"), localizedModifier);
                 default:
                     return type.description();
             }
@@ -663,6 +667,8 @@ namespace ActionParameterSerializer
                         return Utils.JavaFormat(Utils.GetString("the_s_highest_ATK_or_Magic_STR"), localizedModifier);
                     case TargetType.bothAtkAscending:
                         return Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK_or_Magic_STR"), localizedModifier);
+                    case TargetType.energyAscBackWithoutOwner:
+                        return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"), localizedModifier);
                     default:
                         return type.description();
                 }

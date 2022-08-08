@@ -24,6 +24,7 @@ public class AweAction : ActionParameter
 
     public override void childInit()
     {
+        base.childInit();
         durationValues.Add(new ActionValue(actionValue3, actionValue4, null));
         percentValues.Add(new ActionValue(actionValue1, actionValue2, null));
         aweType = (AweType)(actionDetail1);

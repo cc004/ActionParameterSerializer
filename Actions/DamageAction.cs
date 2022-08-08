@@ -25,6 +25,7 @@ public class DamageAction : ActionParameter
     {
         damageClass = (ClassModifier)(actionDetail1);
         criticalModifier = (int)actionValue5.value == 1 ? CriticalModifier.critical : CriticalModifier.normal;
+        decideTargetAtkType = (DecideTargetAtkType)actionDetail2;
 
         switch (damageClass)
         {

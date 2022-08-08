@@ -19,6 +19,7 @@ public class ChannelAction : AuraAction
 
     public override void childInit()
     {
+        base.childInit();
         releaseType = (ReleaseType)actionDetail2;
     }
 

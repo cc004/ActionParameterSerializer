@@ -6,6 +6,12 @@ namespace ActionParameterSerializer.Actions;
 
 public class WaveStartIdleAction : ActionParameter
 {
+    public 
+    override void childInit()
+    {
+        base.childInit();
+    }
+
     public
     override string localizedDetail(int level, Property property)
     {

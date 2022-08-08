@@ -402,7 +402,8 @@ public enum TargetType
     hpAscendingOrNearForward = 36,
     tpDescendingOrMaxForward = 37,
     bothAtkDescending = 38,
-    bothAtkAscending = 39
+    bothAtkAscending = 39,
+    energyAscBackWithoutOwner = 41
 }
 
 public enum DirectionType

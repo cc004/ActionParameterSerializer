@@ -16,7 +16,8 @@ public class KnockAction : ActionParameter
         moveTarget = 4,
         moveTargetParaboric = 5,
         backLimited = 6,
-        dragForwardCaster = 8
+        dragForwardCaster = 8,
+        knockBackGiveValue = 9
     }
 
     private KnockType knockType;
@@ -25,6 +26,7 @@ public class KnockAction : ActionParameter
     override void childInit()
     {
         knockType = (KnockType)(actionDetail1);
+        actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
     public
@@ -47,6 +49,8 @@ public class KnockAction : ActionParameter
 
             case KnockType.dragForwardCaster:
                 return Utils.JavaFormat(Utils.GetString("drag_s1_to_a_position_s2_forward_of_the_caster"), targetParameter.buildTargetClause(), (int)actionValue1.value);
+            case KnockType.knockBackGiveValue:
+                return Utils.JavaFormat(Utils.GetString("Knock_s1_away_s2"), targetParameter.buildTargetClause(), buildExpression(level, property));
             default:
                 return base.localizedDetail(level, property);
         }

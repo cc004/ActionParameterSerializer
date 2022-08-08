@@ -79,5 +79,8 @@ public enum ActionType
     ex = 90,
     exPlus = 91,
     changeEnergyRecoveryRatioByDamage = 92,
-    ignoreDecoyAction = 93
+    ignoreDecoyAction = 93,
+    effectAction = 94,
+    spyAction = 95,
+    changeEnergyFieldAction = 96
 }

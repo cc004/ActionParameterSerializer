@@ -10,9 +10,15 @@ namespace ActionParameterSerializer.Actions;
 
 public class DamageAction : ActionParameter
 {
+    public enum DecideTargetAtkType
+    {
+        bySource = 0,
+        lowerDef = 1,
+    }
 
     public ClassModifier damageClass;
     public CriticalModifier criticalModifier;
+    public DecideTargetAtkType decideTargetAtkType;
 
     public
     override void childInit()
@@ -52,6 +58,10 @@ public class DamageAction : ActionParameter
         if (actionValue6.value != 0)
         {
             str.Append(Utils.JavaFormat(Utils.GetString("Critical_damage_is_s_times_as_normal_damage"), 2 * actionValue6.value));
+        }
+        if (decideTargetAtkType == DecideTargetAtkType.lowerDef)
+        {
+            str.Append(Utils.JavaFormat(Utils.GetString("This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy")));
         }
         return str.ToString();
     }

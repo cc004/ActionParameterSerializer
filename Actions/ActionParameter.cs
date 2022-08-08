@@ -149,6 +149,8 @@ public class ActionParameter
                 return new ToadAction();
             case 71:
                 return new KnightGuardAction();
+            case 72:
+                return new DamageCutAction();
             case 73:
                 return new LogBarrierAction();
             case 74:
@@ -173,6 +175,12 @@ public class ActionParameter
                 return new ChangeEnergyRecoveryRatioByDamageAction();
             case 93:
                 return new IgnoreDecoyAction();
+            case 94:
+                return new EffectAction();
+            case 95:
+                return new SpyAction();
+            case 96:
+                return new ChangeEnergyFieldAction();
             default:
                 return new ActionParameter();
         }

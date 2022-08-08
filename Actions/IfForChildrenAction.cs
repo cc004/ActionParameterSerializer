@@ -17,7 +17,7 @@ public class IfForChildrenAction : ActionParameter
 
         if (actionDetail2 != 0)
         {
-            ifType = (IfType)(actionDetail1);
+            ifType = (IfType)actionDetail1;
             if (Enum.IsDefined(ifType))
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_s3"),
@@ -45,6 +45,11 @@ public class IfForChildrenAction : ActionParameter
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_target_is_magical_type"),
                             actionDetail2 % 10, targetParameter.buildTargetClause(true));
                 }
+                else if (actionDetail1 == 1800)
+                {
+                    trueClause = Utils.JavaFormat(Utils.GetString("Performs_d1_to_s2_if_it_is_a_multi_target_unit"),
+                            actionDetail2 % 10, targetParameter.buildTargetClause());
+                }
                 else if (actionDetail1 >= 6000 && actionDetail1 < 7000)
                 {
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
@@ -55,7 +60,7 @@ public class IfForChildrenAction : ActionParameter
 
         if (actionDetail3 != 0)
         {
-            ifType = (IfType)(actionDetail1);
+            ifType = (IfType)actionDetail1;
             if (Enum.IsDefined(ifType))
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_s3"),
@@ -83,6 +88,11 @@ public class IfForChildrenAction : ActionParameter
                     falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_target_is_not_magical_type"),
                             actionDetail3 % 10, targetParameter.buildTargetClause(true));
                 }
+                else if (actionDetail1 == 1800)
+                {
+                    trueClause = Utils.JavaFormat(Utils.GetString("Performs_d1_to_s2_if_it_is_not_a_multi_target_unit"),
+                            actionDetail3 % 10, targetParameter.buildTargetClause());
+                }
                 else if (actionDetail1 >= 6000 && actionDetail1 < 7000)
                 {
                     falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
@@ -97,36 +107,31 @@ public class IfForChildrenAction : ActionParameter
     override string localizedDetail(int level, Property property)
     {
         if (actionDetail1 == 100 || actionDetail1 == 101 || actionDetail1 == 200 || actionDetail1 == 300 || actionDetail1 == 500 || actionDetail1 == 501
-                || actionDetail1 == 502 || actionDetail1 == 503 || actionDetail1 == 512
+                || actionDetail1 == 502 || actionDetail1 == 503 || actionDetail1 == 504 || actionDetail1 == 511 || actionDetail1 == 512
                 || (actionDetail1 >= 600 && actionDetail1 < 900) || (actionDetail1 >= 901 && actionDetail1 < 1000)
-                || actionDetail1 == 1300 || actionDetail1 == 1400 || (actionDetail1 >= 6000 && actionDetail1 < 7000))
+                || actionDetail1 == 1300 || actionDetail1 == 1400 || actionDetail1 == 1600 || actionDetail1 == 1800
+                || (actionDetail1 >= 6000 && actionDetail1 < 7000))
         {
             if (trueClause != null && falseClause != null)
-            {
-                return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause + falseClause);
-            }
+                return Utils.JavaFormat(Utils.GetString("Condition_s, trueClause + falseClause"));
             else if (trueClause != null)
-            {
-                return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause);
-            }
+                return Utils.JavaFormat(Utils.GetString("Condition_s, trueClause"));
             else if (falseClause != null)
-            {
-                return Utils.JavaFormat(Utils.GetString("Condition_s"), falseClause);
-            }
+                return Utils.JavaFormat(Utils.GetString("Condition_s, falseClause"));
         }
         else if (actionDetail1 >= 0 && actionDetail1 < 100)
         {
             if (actionDetail2 != 0 && actionDetail3 != 0)
             {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2_otherwise_d3"), actionDetail1, actionDetail2 % 10, actionDetail3 % 10);
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2_otherwise_d3, actionDetail1, actionDetail2 % 10, actionDetail3 % 10"));
             }
             else if (actionDetail2 != 0)
             {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2"), actionDetail1, actionDetail2 % 10);
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2, actionDetail1, actionDetail2 % 10"));
             }
             else if (actionDetail3 != 0)
             {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2"), 100 - actionDetail1, actionDetail3 % 10);
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2, 100 - actionDetail1, actionDetail3 % 10"));
             }
         }
         return base.localizedDetail(level, property);
@@ -144,7 +149,11 @@ public enum IfType
     cursed = 501,
     poisoned = 502,
     venomed = 503,
+    cursed_or_hexed = 511,
     poisoned_or_venomed = 512,
     breaking = 710,
-    polymorphed = 1400
+    polymorphed = 1400,
+    feared = 1600,
+    spy = 1601,
+    magic_defence_decreased = 1700,
 }

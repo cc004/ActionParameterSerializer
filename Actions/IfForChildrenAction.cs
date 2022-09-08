@@ -149,11 +149,12 @@ public enum IfType
     cursed = 501,
     poisoned = 502,
     venomed = 503,
+    hexed = 504,
     cursed_or_hexed = 511,
     poisoned_or_venomed = 512,
     breaking = 710,
     polymorphed = 1400,
     feared = 1600,
-    spy = 1601,
+    is_invisible = 1601,
     magic_defence_decreased = 1700,
 }

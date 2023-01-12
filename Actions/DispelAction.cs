@@ -16,6 +16,7 @@ public class DispelAction : ActionParameter
         unknown = 0,
         buff = 1,
         debuff = 2,
+        statusUpBuff = 3,
         barriers = 10
     }
 

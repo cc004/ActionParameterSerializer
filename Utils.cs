@@ -315,7 +315,7 @@ namespace ActionParameterSerializer
         }
 
         private static Dictionary<string, string> cache =
-            JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(BepInEx.Paths.PluginPath, "locale", "string.json")));
+            JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(BepInEx.Paths.PluginPath, "Assets", "locale", "string.json")));
 
         public static string GetString(string name)
         {

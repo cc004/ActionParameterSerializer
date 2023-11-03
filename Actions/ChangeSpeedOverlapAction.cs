@@ -13,13 +13,13 @@ namespace ActionParameterSerializer.Actions;
 public class ChangeSpeedOverlapAction : ActionParameter
 {
 
-    public enum SpeedChangeType
+    protected enum SpeedChangeType
     {
         slow = 1,
         haste = 2
     }
 
-    public SpeedChangeType speedChangeType;
+    private SpeedChangeType speedChangeType;
     public List<ActionValue> durationValues = new();
 
     public

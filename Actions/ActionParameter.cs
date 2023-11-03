@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace ActionParameterSerializer.Actions;
@@ -185,6 +186,26 @@ public class ActionParameter
                 return new ChangeEnergyByDamageAction();
             case 98:
                 return new EnergyDamageReduceAction();
+            case 99:
+                return new ChangeSpeedOverwriteFieldAction();
+            case 100:
+                return new UnableStateGuardAction();
+            /*case 101:
+                return new AttackSealForAllEnemyAction();
+            case 102:
+                return new AccumulativeDamageForAllEnemyAction();
+            case 103:
+                return new CopyAtkParamAction();
+            case 104:
+                return new EveryAttackCriticalAction();
+            case 105:
+                return new EnvironmentAction();
+            case 106:
+                return new ProtectAction();
+            case 901:
+                return new ExStartPassiveAction();
+            case 902:
+                return new ExConditionPassiveAction();*/
             default:
                 return new ActionParameter();
         }
@@ -367,14 +388,21 @@ public class ActionParameter
         return buildExpression(level, actionValues, roundingMode, property, false, false, false);
     }
 
+    public String buildExpression(int level, RoundingMode? roundingMode, Property property, bool isConstant)
+    {
+        return buildExpression(level, actionValues, roundingMode, property, false, false, false, isConstant);
+    }
+
     public string buildExpression(int level,
                                   List<ActionValue> actionValues,
                                   RoundingMode? roundingMode,
                                   Property property,
                                   bool isHealing,
                                   bool isSelfTPRestoring,
-                                  bool hasBracesIfNeeded)
+                                  bool hasBracesIfNeeded,
+                                  params bool[] redundancy)
     {
+        bool isConstant = redundancy.Length > 0 && redundancy[0];
         if (actionValues == null)
         {
             actionValues = this.actionValues;
@@ -456,7 +484,7 @@ public class ActionParameter
                 return hasBracesIfNeeded ? bracesIfNeeded(expression.ToString()) : expression.ToString();
             }
         }
-        else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL)
+        else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL && !isConstant)
         {
             StringBuilder expression = new StringBuilder();
             foreach (ActionValue value in actionValues)

@@ -24,7 +24,7 @@ public class DamageAction : ActionParameter
     override void childInit()
     {
         damageClass = (ClassModifier)(actionDetail1);
-        criticalModifier = (int)actionValue5.value == 1 ? CriticalModifier.critical : CriticalModifier.normal;
+        criticalModifier = Math.Abs((int)actionValue5.value) == 1 ? CriticalModifier.critical : CriticalModifier.normal;
         decideTargetAtkType = (DecideTargetAtkType)actionDetail2;
 
         switch (damageClass)
@@ -63,6 +63,10 @@ public class DamageAction : ActionParameter
         if (decideTargetAtkType == DecideTargetAtkType.lowerDef)
         {
             str.Append(Utils.JavaFormat(Utils.GetString("This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy")));
+        }
+        if (actionValue7.value != 0)
+        {
+            str.Append(Utils.JavaFormat(Utils.GetString("This_damage_ignores_s1_s2_defense"), actionValue7.value, damageClass.description()));
         }
         return str.ToString();
     }

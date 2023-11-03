@@ -20,7 +20,7 @@ public class UnableStateGuardAction : ActionParameter
     public
     override string localizedDetail(int level, Property property)
     {
-        String amount = buildExpression(level, property);
+        string amount = buildExpression(level, property);
         try
         {
             int intAmount = int.Parse(amount);

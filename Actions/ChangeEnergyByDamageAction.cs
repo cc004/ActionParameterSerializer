@@ -4,7 +4,7 @@ namespace ActionParameterSerializer.Actions;
 
 
 
-public class ChangeEnergyByDamageAction : ActionParameter
+public class ChargeEnergyByDamageAction : ActionParameter
 {
     public
     override void childInit()

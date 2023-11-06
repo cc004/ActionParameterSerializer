@@ -183,7 +183,7 @@ public class ActionParameter
             case 96:
                 return new ChangeEnergyFieldAction();
             case 97:
-                return new ChangeEnergyByDamageAction();
+                return new ChargeEnergyByDamageAction();
             case 98:
                 return new EnergyDamageReduceAction();
             case 99:

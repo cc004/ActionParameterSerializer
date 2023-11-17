@@ -12,7 +12,7 @@ namespace ActionParameterSerializer.Actions;
 public class AttackSealAction : ActionParameter
 {
 
-    public enum Condition  // 7.9.1 修改enum
+    public enum Condition  // 7.9.1 淇敼enum
     {
         unknown = -1,
         damage = 1,
@@ -39,7 +39,7 @@ public class AttackSealAction : ActionParameter
         base.childInit();
         condition = (Condition)(actionDetail1);
         target = (Target)(actionDetail3);
-        // durationValues.Add(new ActionValue(actionValue3, actionValue4, null)); // 7.9.1 改为SealEffectTime 
+        // durationValues.Add(new ActionValue(actionValue3, actionValue4, null)); // 7.9.1 鏀逛负SealEffectTime 
         durationValues.Add(new ActionValue(actionValue5, actionValue6, null));
     }
 

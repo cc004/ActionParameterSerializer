@@ -190,10 +190,10 @@ public class ActionParameter
                 return new ChangeSpeedOverwriteFieldAction();
             case 100:
                 return new UnableStateGuardAction();
-            /*case 101:
-                return new AttackSealForAllEnemyAction();
+            case 101:
+                return new AttackSealActionForAllEnemy();
             case 102:
-                return new AccumulativeDamageForAllEnemyAction();
+                return new AccumulativeDamageActionForAllEnemy();
             case 103:
                 return new CopyAtkParamAction();
             case 104:
@@ -202,6 +202,11 @@ public class ActionParameter
                 return new EnvironmentAction();
             case 106:
                 return new ProtectAction();
+            case 107:
+                return new ChangeCriticalReferenceAction();
+            case 108:
+                return new IfContainsUnitGroupAction();
+            /*
             case 901:
                 return new ExStartPassiveAction();
             case 902:
@@ -369,8 +374,8 @@ public class ActionParameter
         return Utils.JavaFormat(Utils.GetString("Unknown_effect_d1_to_s2_with_details_s3_values_s4"),
                 rawActionType,
                 targetParameter.buildTargetClause(),
-                actionDetails.ToString(),
-                rawActionValues.ToString());
+                string.Join(",", actionDetails),
+                string.Join(",", rawActionValues));
     }
 
     public string buildExpression(int level, Property property)

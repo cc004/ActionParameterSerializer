@@ -333,6 +333,11 @@ namespace ActionParameterSerializer
         {
             return GetString(re2.Replace(t.GetDescription(), match => "_" + match.Groups[0].Value.ToLower()));
         }
+        public static string rawDescription(this Enum t)
+        {
+            return GetString(t.GetDescription());
+        }
+
         public static string description(this AuraAction.AuraType val)
         {
             switch (val)

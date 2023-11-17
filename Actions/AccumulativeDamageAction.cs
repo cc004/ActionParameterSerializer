@@ -11,7 +11,7 @@ namespace ActionParameterSerializer.Actions;
 public class AccumulativeDamageAction : ActionParameter
 {
 
-    private readonly List<ActionValue> stackValues = new();
+    protected readonly List<ActionValue> stackValues = new();
 
     public
     override void childInit()

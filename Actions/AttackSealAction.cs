@@ -12,13 +12,14 @@ namespace ActionParameterSerializer.Actions;
 public class AttackSealAction : ActionParameter
 {
 
-    public enum Condition
+    public enum Condition  // 7.9.1 ÐÞ¸Äenum
     {
         unknown = -1,
         damage = 1,
         target = 2,
-        hit = 3,
-        criticalHit = 4
+        damage_multi = 3,
+        criticalHit = 4,
+        hit = 5
     }
 
     public enum Target
@@ -38,7 +39,8 @@ public class AttackSealAction : ActionParameter
         base.childInit();
         condition = (Condition)(actionDetail1);
         target = (Target)(actionDetail3);
-        durationValues.Add(new ActionValue(actionValue3, actionValue4, null));
+        // durationValues.Add(new ActionValue(actionValue3, actionValue4, null)); // 7.9.1 ¸ÄÎªSealEffectTime 
+        durationValues.Add(new ActionValue(actionValue5, actionValue6, null));
     }
 
     public

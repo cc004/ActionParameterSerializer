@@ -100,6 +100,24 @@ public class IfForAllAction : ActionParameter
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
                         actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
             }
+            else if (actionDetail1 >= 3000)
+            {
+                var env = (EnvironmentAction.EnvironmentType) (actionDetail1 - 3000);
+                trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_enabled"),
+                    actionDetail2 % 10, env.description());
+            }
+            else if (actionDetail1 >= 1600)
+            {
+                var arr = new[] { 35, 67, 71 };
+                trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                    actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+            }
+            else if (actionDetail1 >= 1500)
+            {
+                var arr = new[] { 35, 67, 71 };
+                trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                    actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+            }
         }
         else if (actionDetail3 == 0)
         {
@@ -189,6 +207,24 @@ public class IfForAllAction : ActionParameter
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
                         actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
+            }
+            else if (actionDetail1 >= 3000)
+            {
+                var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
+                falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_not_enabled"),
+                    actionDetail2 % 10, env.description());
+            }
+            else if (actionDetail1 >= 1600)
+            {
+                var arr = new[] { 35, 67, 71 };
+                falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
+                    actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+            }
+            else if (actionDetail1 >= 1500)
+            {
+                var arr = new[] { 35, 67, 71 };
+                falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
+                    actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
             }
         }
         else if (actionDetail2 == 0)

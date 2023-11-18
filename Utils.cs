@@ -296,7 +296,7 @@ namespace ActionParameterSerializer
             {
                 if (match.Groups[1].Success) return args[int.Parse(match.Groups[2].Value) - 1].ToString();
                 return args[i++].ToString();
-            });
+            }).Replace("%%", "%");
             //$"{format}({string.Join(",", args)})");
         }
 
@@ -348,15 +348,6 @@ namespace ActionParameterSerializer
         {
             switch (val)
             {
-                case AuraAction.AuraType.atk: return PropertyKey.atk.description();
-                case AuraAction.AuraType.def: return PropertyKey.def.description();
-                case AuraAction.AuraType.magicStr: return PropertyKey.magicStr.description();
-                case AuraAction.AuraType.magicDef: return PropertyKey.magicDef.description();
-                case AuraAction.AuraType.dodge: return PropertyKey.dodge.description();
-                case AuraAction.AuraType.physicalCritical: return PropertyKey.physicalCritical.description();
-                case AuraAction.AuraType.magicalCritical: return PropertyKey.magicCritical.description();
-                case AuraAction.AuraType.energyRecoverRate: return PropertyKey.energyRecoveryRate.description();
-                case AuraAction.AuraType.lifeSteal: return PropertyKey.lifeSteal.description();
                 case AuraAction.AuraType.moveSpeed: return Utils.GetString("Move_Speed");
                 case AuraAction.AuraType.physicalCriticalDamage: return Utils.GetString("Physical_Critical_Damage");
                 case AuraAction.AuraType.magicalCriticalDamage: return Utils.GetString("Magical_Critical_Damage");
@@ -366,7 +357,10 @@ namespace ActionParameterSerializer
                 case AuraAction.AuraType.receivedPhysicalDamage: return Utils.GetString("received_physical_damage");
                 case AuraAction.AuraType.receivedMagicalDamage: return Utils.GetString("received_magical_damage");
                 case AuraAction.AuraType.maxHP: return Utils.GetString("max_HP");
-                default: return "";
+                default:
+                    if (Enum.TryParse<PropertyKey>(val.ToString(), out var key))
+                        return key.description();
+                    return ((Enum) val).description();
             }
         }
 

@@ -4,7 +4,7 @@ namespace ActionParameterSerializer.Actions;
 
 public class EnvironmentAction : ActionParameter
 {
-    enum EnvironmentType
+    public enum EnvironmentType
     {
         thundering = 137
     }
@@ -18,9 +18,8 @@ public class EnvironmentAction : ActionParameter
 
     public override string localizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Summon_field_of_s1_environment_for_s2_for_s3_sec"),
+        return Utils.JavaFormat(Utils.GetString("Summon_field_of_s1_environment_for_s2_sec"),
             environmentType.description(),
-            targetParameter.buildTargetClause(),
             actionValue1.value);
     }
 }

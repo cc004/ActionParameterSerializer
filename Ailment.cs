@@ -41,6 +41,7 @@
             violentPoison = 4,
             hex = 5,
             compensation = 6,
+            world_lightning = 10,
             unknown = -1
         }
 

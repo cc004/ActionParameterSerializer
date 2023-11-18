@@ -60,6 +60,54 @@ public class IfForChildrenAction : ActionParameter
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
                             actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000);
                 }
+                else if (actionDetail1 >= 1600)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+                }
+                else if (actionDetail1 >= 1500)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+                }
+                else if (actionDetail1 >= 3000)
+                {
+                    var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
+                    trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_enabled"),
+                        actionDetail2 % 10, env.description());
+                }
+                else if (actionDetail1 >= 1600)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+                }
+                else if (actionDetail1 >= 1500)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+                }
+                else if (actionDetail1 >= 3000)
+                {
+                    var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
+                    falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_not_enabled"),
+                        actionDetail2 % 10, env.description());
+                }
+                else if (actionDetail1 >= 1600)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+                }
+                else if (actionDetail1 >= 1500)
+                {
+                    var arr = new[] { 35, 67, 71 };
+                    falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
+                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+                }
             }
         }
 
@@ -116,11 +164,22 @@ public class IfForChildrenAction : ActionParameter
     public
     override string localizedDetail(int level, Property property)
     {
-        if (actionDetail1 == 100 || actionDetail1 == 101 || actionDetail1 == 200 || actionDetail1 == 300 || actionDetail1 == 500 || actionDetail1 == 501
-                || actionDetail1 == 502 || actionDetail1 == 503 || actionDetail1 == 504 || actionDetail1 == 511 || actionDetail1 == 512
-                || (actionDetail1 >= 600 && actionDetail1 < 900) || (actionDetail1 >= 901 && actionDetail1 < 1000)
-                || actionDetail1 == 1300 || actionDetail1 == 1400 || actionDetail1 == 1600 || actionDetail1 == 1800
-                || actionDetail1 == 1900 || (actionDetail1 >= 6000 && actionDetail1 < 7000))
+        if (actionDetail1 >= 0 && actionDetail1 < 100)
+        {
+            if (actionDetail2 != 0 && actionDetail3 != 0)
+            {
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2_otherwise_d3"), actionDetail1, actionDetail2 % 10, actionDetail3 % 10);
+            }
+            else if (actionDetail2 != 0)
+            {
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2"), actionDetail1, actionDetail2 % 10);
+            }
+            else if (actionDetail3 != 0)
+            {
+                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2"), 100 - actionDetail1, actionDetail3 % 10);
+            }
+        }
+        else
         {
             if (trueClause != null && falseClause != null)
                 return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause + falseClause);
@@ -128,21 +187,6 @@ public class IfForChildrenAction : ActionParameter
                 return Utils.JavaFormat(Utils.GetString("Condition_s"), trueClause);
             else if (falseClause != null)
                 return Utils.JavaFormat(Utils.GetString("Condition_s"), falseClause);
-        }
-        else if (actionDetail1 >= 0 && actionDetail1 < 100)
-        {
-            if (actionDetail2 != 0 && actionDetail3 != 0)
-            {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2_otherwise_d3, actionDetail1, actionDetail2 % 10, actionDetail3 % 10"));
-            }
-            else if (actionDetail2 != 0)
-            {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2, actionDetail1, actionDetail2 % 10"));
-            }
-            else if (actionDetail3 != 0)
-            {
-                return Utils.JavaFormat(Utils.GetString("Random_event_d1_chance_use_d2, 100 - actionDetail1, actionDetail3 % 10"));
-            }
         }
         return base.localizedDetail(level, property);
     }

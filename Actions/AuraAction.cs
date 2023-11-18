@@ -33,6 +33,8 @@ public class AuraAction : ActionParameter
         receivedDamage = 15,
         receivedPhysicalDamage = 16,
         receivedMagicalDamage = 17,
+        physicalDamageUpPercent = 18,
+        magicDamageUpPercent = 19,
         maxHP = 100
     }
 
@@ -77,13 +79,20 @@ public class AuraAction : ActionParameter
             auraType = (AuraType)(actionDetail1 / 10);
         }
         breakType = (BreakType)(actionDetail2);
-        if (auraType == AuraType.receivedCriticalDamage
-            || auraType == AuraType.receivedMagicalDamage
-            || auraType == AuraType.receivedPhysicalDamage
-            || auraType == AuraType.receivedDamage)
+
+        switch (auraType)
         {
-            auraActionType = auraActionType.toggle();
-            percentModifier = PercentModifier.percent;
+            case AuraType.receivedCriticalDamage:
+            case AuraType.receivedMagicalDamage:
+            case AuraType.receivedPhysicalDamage:
+            case AuraType.receivedDamage:
+                auraActionType = auraActionType.toggle();
+                percentModifier = PercentModifier.percent;
+                break;
+            case AuraType.physicalDamageUpPercent:
+            case AuraType.magicDamageUpPercent:
+                percentModifier = PercentModifier.percent;
+                break;
         }
     }
 

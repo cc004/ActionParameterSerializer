@@ -312,11 +312,15 @@ namespace ActionParameterSerializer
             }
         }
 
-        private static Dictionary<string, string> cache =
-            JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(BepInEx.Paths.PluginPath, "Assets", "locale", "string.json")));
+        public static string path = "string.json";
+
+        private static Dictionary<string, string> cache;
 
         public static string GetString(string name)
         {
+            if (cache == null)
+                cache = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+
             if (cache.TryGetValue(name, out var val)) return val;
             if (cache.TryGetValue(name.ToUpper(), out val)) return val;
             if (cache.TryGetValue(name[..1].ToUpper() + name[1..], out val)) return val;

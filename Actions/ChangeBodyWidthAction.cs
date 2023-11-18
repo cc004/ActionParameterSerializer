@@ -11,7 +11,7 @@ public class ChangeBodyWidthAction : ActionParameter
         base.childInit();
     }
     
-    override string localizedDetail(int level, Property property)
+    public override string localizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Change_body_width_to_s"), actionValue1.valueString());
     }

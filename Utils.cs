@@ -259,7 +259,7 @@ namespace ActionParameterSerializer
             descDictionary.TryAdd(enumType, dictionary);
         }
     }
-    internal static class Utils
+    public static class Utils
     {
         public static ExclusiveAllType exclusiveWithAll(this TargetType type)
         {

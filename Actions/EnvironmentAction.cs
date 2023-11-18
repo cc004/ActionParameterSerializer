@@ -21,6 +21,6 @@ public class EnvironmentAction : ActionParameter
         return Utils.JavaFormat(Utils.GetString("Summon_field_of_s1_environment_for_s2_for_s3_sec"),
             environmentType.description(),
             targetParameter.buildTargetClause(),
-            actionValue3.value);
+            actionValue1.value);
     }
 }

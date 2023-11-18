@@ -324,6 +324,8 @@ namespace ActionParameterSerializer
             if (cache.TryGetValue(name, out var val)) return val;
             if (cache.TryGetValue(name.ToUpper(), out val)) return val;
             if (cache.TryGetValue(name[..1].ToUpper() + name[1..], out val)) return val;
+
+            return name;
 #if DEBUG
             throw new NotImplementedException();
 #else

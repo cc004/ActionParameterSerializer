@@ -717,6 +717,7 @@
   "both": "全部",
   "thundering": "界雷",
   "Summon_field_of_s1_environment_for_s2_for_s3_sec": "使环境变为%1$s，并进入环境内的%2$s施加技能效果，持续时间 [%3$s] 秒。",
+  "Protect_s1_from_certain_skill_for_s2_sec": "当%1$s被一些动作锁定时，自身代替承受，持续时间 [%2$s] 秒",
   "Protect_s1_from_certain_skill_max_s2_for_s3_sec": "当%1$s被一些动作锁定时，自身代替承受（最大 [%2$s] 次），持续时间 [%3$s] 秒",
   "sum_critial": "物理暴击和魔法暴击的总和",
   "Use_critical_reference_s1_for_skill_d2": "使 [动作%2$s] 使用%1$s来计算暴击率",

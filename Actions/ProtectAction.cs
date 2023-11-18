@@ -13,6 +13,11 @@ public class ProtectAction : ActionParameter
 
     public override string localizedDetail(int level, Property property)
     {
+        if (actionValue1.value == 0 && actionDetail2 == 0)
+            return Utils.JavaFormat(Utils.GetString("Protect_s1_from_certain_skill_for_s2_sec"),
+                targetParameter.buildTargetClause(),
+                buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+
         return Utils.JavaFormat(Utils.GetString("Protect_s1_from_certain_skill_max_s2_for_s3_sec"),
             targetParameter.buildTargetClause(),
             buildExpression(level, counterValues, RoundingMode.FLOOR, property),

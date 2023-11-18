@@ -507,6 +507,7 @@ namespace ActionParameterSerializer
                     return Utils.JavaFormat(Utils.GetString("the_lowest_TP"));
                 case TargetType.atkDescending:
                 case TargetType.atkDescendingOrNear:
+                case TargetType.atkDecForwardWithoutOwner:
                     return Utils.JavaFormat(Utils.GetString("the_highest_ATK"));
                 case TargetType.atkAscending:
                 case TargetType.atkAscendingOrNear:
@@ -539,82 +540,15 @@ namespace ActionParameterSerializer
                     return Utils.JavaFormat(Utils.GetString("the_lowest_ATK_or_Magic_STR"));
                 case TargetType.energyAscBackWithoutOwner:
                     return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"));
+                case TargetType.atkDefAscForward:
+                    return Utils.JavaFormat(Utils.GetString("the_lowest_DEF"));
+                case TargetType.magicDefAscForward:
+                    return Utils.JavaFormat(Utils.GetString("the_lowest_Magic_DEF"));
                 default:
-                    return "";
+                    return Utils.JavaFormat(((Enum)type).description());
             }
         }
-
-        public static string description(this TargetType type, TargetCount targetCount, string localizedCount)
-        {
-            string localizedModifier = localizedCount == null ? targetCount.description() : localizedCount;
-            switch (type)
-            {
-                case TargetType.unknown:
-                    return Utils.JavaFormat(Utils.GetString("s_unknown_type"), localizedModifier);
-                case TargetType.zero:
-                case TargetType.near:
-                case TargetType.none:
-                    return Utils.JavaFormat(Utils.GetString("s_nearest"), localizedModifier);
-                case TargetType.far:
-                    return Utils.JavaFormat(Utils.GetString("s_farthest"), localizedModifier);
-                case TargetType.hpAscending:
-                    return Utils.JavaFormat(Utils.GetString("s_lowest_HP_ratio"), localizedModifier);
-                case TargetType.hpDescending:
-                    return Utils.JavaFormat(Utils.GetString("s_highest_HP_ratio"), localizedModifier);
-                case TargetType.hpAscendingOrNearForward:
-                    return Utils.JavaFormat(Utils.GetString("s_lowest_HP"), localizedModifier);
-                case TargetType.hpDescendingOrNearForward:
-                    return Utils.JavaFormat(Utils.GetString("s_highest_HP"), localizedModifier);
-                case TargetType.forward:
-                    return Utils.JavaFormat(Utils.GetString("s_most_backward"), localizedModifier);
-                case TargetType.backward:
-                    return Utils.JavaFormat(Utils.GetString("s_most_forward"), localizedModifier);
-                case TargetType.tpDescending:
-                case TargetType.tpDescendingOrNear:
-                case TargetType.tpDescendingOrMaxForward:
-                    return Utils.JavaFormat(Utils.GetString("s_highest_TP"), localizedModifier);
-                case TargetType.tpAscending:
-                case TargetType.tpReducing:
-                case TargetType.tpAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("s_lowest_TP"), localizedModifier);
-                case TargetType.atkDescending:
-                case TargetType.atkDescendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("s_highest_ATK"), localizedModifier);
-                case TargetType.atkAscending:
-                case TargetType.atkAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("s_lowest_ATK"), localizedModifier);
-                case TargetType.magicSTRDescending:
-                case TargetType.magicSTRDescendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("s_highest_Magic_STR"), localizedModifier);
-                case TargetType.magicSTRAscending:
-                case TargetType.magicSTRAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("s_lowest_Magic_STR"), localizedModifier);
-                case TargetType.random:
-                case TargetType.randomOnce:
-                    return Utils.JavaFormat(Utils.GetString("s_random"), localizedModifier);
-                case TargetType.summon:
-                    return Utils.JavaFormat(Utils.GetString("s_minion"), localizedModifier);
-                case TargetType.physics:
-                    return Utils.JavaFormat(Utils.GetString("s_physics"), localizedModifier);
-                case TargetType.magic:
-                    return Utils.JavaFormat(Utils.GetString("s_magic"), localizedModifier);
-                case TargetType.boss:
-                    return Utils.JavaFormat(Utils.GetString("s_boss"), localizedModifier);
-                case TargetType.shadow:
-                    return Utils.JavaFormat(Utils.GetString("s_shadow"), localizedModifier);
-                case TargetType.nearWithoutSelf:
-                    return Utils.JavaFormat(Utils.GetString("s_nearest_without_self"), localizedModifier);
-                case TargetType.bothAtkDescending:
-                    return Utils.JavaFormat(Utils.GetString("s_the_highest_ATK_or_Magic_STR"), localizedModifier);
-                case TargetType.bothAtkAscending:
-                    return Utils.JavaFormat(Utils.GetString("s_the_lowest_ATK_or_Magic_STR"), localizedModifier);
-                case TargetType.energyAscBackWithoutOwner:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"), localizedModifier);
-                default:
-                    return type.description();
-            }
-        }
-
+        
         public static string description(this TargetType type, TargetNumber targetNumber, string localizedNumber)
         {
 
@@ -675,9 +609,13 @@ namespace ActionParameterSerializer
                     case TargetType.bothAtkAscending:
                         return Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK_or_Magic_STR"), localizedModifier);
                     case TargetType.energyAscBackWithoutOwner:
-                        return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"), localizedModifier);
+                        return Utils.JavaFormat(Utils.GetString("the_s_th_lowest_TP_except_self"), localizedModifier);
+                    case TargetType.atkDefAscForward:
+                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_DEF"), localizedModifier);
+                    case TargetType.magicDefAscForward:
+                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_Magic_DEF"), localizedModifier);
                     default:
-                        return type.description();
+                        return Utils.JavaFormat("s_" + ((Enum)type).description(), localizedModifier);
                 }
             }
             else

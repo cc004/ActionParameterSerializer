@@ -18,20 +18,17 @@ public class UnableStateGuardAction : ActionParameter
     public
     override string localizedDetail(int level, Property property)
     {
-        string amount = buildExpression(level, property);
-        try
+        if (actionValue1.value == -1 && actionValue2.value == 0)
         {
-            int intAmount = int.Parse(amount);
-            if (intAmount < 0)
-            {
-                amount = ((long)int.MaxValue - int.MinValue + intAmount).ToString();
-            }
+            return Utils.JavaFormat(Utils.GetString("Enable_s1_to_resist_all_sorts_of_incapacity_efficacies_in_a_period_of_s2_sec"),
+                targetParameter.buildTargetClause(),
+                buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
+            );
         }
-        catch (Exception ignored) { }
-
+        
         return Utils.JavaFormat(Utils.GetString("Enable_s1_to_resist_all_sorts_of_incapacity_efficacies_up_to_s2_times_in_a_period_of_s3_sec"),
                 targetParameter.buildTargetClause(),
-                amount,
+                buildExpression(level, property),
                 buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
         );
     }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
 namespace ActionParameterSerializer.Actions;
@@ -405,7 +406,11 @@ public enum TargetType
     bothAtkAscending = 39,
     energyAscBackWithoutOwner = 41,
     parentTargetParts = 42,
-    atkDecForwardWithoutOwner = 43
+    atkDecForwardWithoutOwner = 43,
+    hpAscWithoutOwner,
+    atkDefAscForward,
+    magicDefAscForward,
+    flightOnly
 }
 
 public enum DirectionType

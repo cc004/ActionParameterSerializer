@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using static ActionParameterSerializer.Actions.ModeChangeAction;
 
 namespace ActionParameterSerializer
 {
@@ -208,6 +209,11 @@ namespace ActionParameterSerializer
                 return value.ToDictionary((KeyValuePair<long, string> k) => Enum.TryParse<TEnum>(k.Key.ToString(), ignoreCase: true, out TEnum result) ? result : result, (KeyValuePair<long, string> v) => v.Value);
             }
             return null;
+        }
+        public static string GetPascalDescription(this Enum input)
+        {
+            string[] words = input.GetDescription<Attribute>().Split('_');
+            return string.Join("", words.Select(w => char.ToUpper(w[0]) + w.Substring(1).ToLower()));
         }
 
         public static void RegisterDescription<TEnum, TArrtibute>(string attrPropName = "Description") where TEnum : struct where TArrtibute : Attribute

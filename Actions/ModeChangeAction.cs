@@ -47,7 +47,7 @@ public class ModeChangeAction : ActionParameter
         {
             case ModeChangeType.time:
                 return Utils.JavaFormat(Utils.GetString("Change_attack_pattern_to_d1_for_s2_sec_set_abnormal_state_s3_to_self"),
-                        actionDetail2 % 10, actionValue1.valueString(), additionalAbnormalType.GetDescription());
+                        actionDetail2 % 10, actionValue1.valueString(), additionalAbnormalType.GetPascalDescription());
             case ModeChangeType.energy:
                 return Utils.JavaFormat(Utils.GetString("Cost_s1_TP_sec_change_attack_pattern_to_d2_until_TP_is_zero"),
                         Utils.roundDownDouble(actionValue1.value), actionDetail2 % 10);

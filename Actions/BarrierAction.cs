@@ -22,49 +22,42 @@ public class BarrierAction : ActionParameter
     public BarrierType barrierType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         barrierType = (BarrierType)(actionDetail1);
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (barrierType)
+        return barrierType switch
         {
-            case BarrierType.physicalGuard:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_physical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            case BarrierType.magicalGuard:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_magical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            case BarrierType.physicalDrain:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_physical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            case BarrierType.magicalDrain:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_magical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            case BarrierType.bothDrain:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_physical_and_magical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            case BarrierType.bothGuard:
-                return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_physical_and_magical_damage_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
-                        Utils.roundDouble(actionValue3.value));
-            default:
-                return base.localizedDetail(level, property);
-        }
+            BarrierType.physicalGuard => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_physical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            BarrierType.magicalGuard => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_magical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            BarrierType.physicalDrain => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_physical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            BarrierType.magicalDrain => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_magical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            BarrierType.bothDrain => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_absorb_s2_physical_and_magical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            BarrierType.bothGuard => Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_nullify_s2_physical_and_magical_damage_for_s3_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, property),
+                                    Utils.roundDouble(actionValue3.value)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

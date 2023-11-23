@@ -6,7 +6,7 @@ namespace ActionParameterSerializer.Actions;
 public class EveryAttackCriticalAction : ActionParameter
 {
 
-    private enum eEveryAtkCriticalType
+    private enum EEveryAtkCriticalType
     {
         physical = 1,
         magical,
@@ -14,19 +14,19 @@ public class EveryAttackCriticalAction : ActionParameter
     }
 
     private readonly List<ActionValue> durationValues = new();
-    private eEveryAtkCriticalType atkType;
+    private EEveryAtkCriticalType atkType;
 
-    public override void childInit()
+    public override void ChildInit()
     {
-        base.childInit();
-        atkType = (eEveryAtkCriticalType) actionDetail1;
+        base.ChildInit();
+        atkType = (EEveryAtkCriticalType) actionDetail1;
         durationValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
-    public override string localizedDetail(int level, Property property)
+    public override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Enchant_self_with_s1_attack_critical_for_s2_sec"),
              atkType.description(),
-            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

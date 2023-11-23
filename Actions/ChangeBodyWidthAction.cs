@@ -6,13 +6,13 @@ namespace ActionParameterSerializer.Actions;
 
 public class ChangeBodyWidthAction : ActionParameter
 {
-    public override void childInit()
+    public override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
     
-    public override string localizedDetail(int level, Property property)
+    public override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Change_body_width_to_s"), actionValue1.valueString());
+        return Utils.JavaFormat(Utils.GetString("Change_body_width_to_s"), actionValue1.ValueString());
     }
 }

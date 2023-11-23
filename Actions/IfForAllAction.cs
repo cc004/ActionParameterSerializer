@@ -12,7 +12,7 @@ public class IfForAllAction : ActionParameter
     private IfType ifType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         ifType = (IfType)(actionDetail1);
 
@@ -20,10 +20,10 @@ public class IfForAllAction : ActionParameter
         {
             if (actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1700 || actionDetail1 == 1601)
             {
-                IfType ifType = (IfType)actionDetail1;
+                IfType? ifType = (IfType)actionDetail1;
                 if (ifType != null)
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_s3"),
-                        actionDetail2 % 100, targetParameter.buildTargetClause(true), ifType.description());
+                        actionDetail2 % 100, targetParameter.BuildTargetClause(true), ifType.description());
             }
             else if (actionDetail1 >= 0 && actionDetail1 < 100)
             {
@@ -33,42 +33,42 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 >= 500 && actionDetail1 <= 512)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_has_s3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(), ifType.description());
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(), ifType.description());
             }
             else if (actionDetail1 == 599)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_has_any_dot_debuff"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause());
+                        actionDetail2 % 10, targetParameter.BuildTargetClause());
             }
             else if (actionDetail1 >= 600 && actionDetail1 < 700)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 600, (int)actionValue3.value);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 600, (int)actionValue3.value);
             }
             else if (actionDetail1 == 700)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_alone"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true));
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true));
             }
             else if (actionDetail1 >= 701 && actionDetail1 < 710)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_the_count_of_s2_except_stealth_units_is_d3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(), actionDetail1 - 700);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(), actionDetail1 - 700);
             }
             else if (actionDetail1 == 720)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_among_s2_exists_unit_ID_d3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(), (int)actionValue3.value);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(), (int)actionValue3.value);
             }
             else if (actionDetail1 == 721)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true), (int)actionValue3.value);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true), (int)actionValue3.value);
             }
             else if (actionDetail1 >= 901 && actionDetail1 < 1000)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_HP_is_below_d3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 900);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 900);
             }
             else if (actionDetail1 == 1000)
             {
@@ -88,17 +88,17 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 == 1800)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("Performs_d1_if_s2_is_a_multi_target_unit"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause());
+                        actionDetail2 % 10, targetParameter.BuildTargetClause());
             }
             else if (actionDetail1 >= 6000 && actionDetail1 < 7000 && actionValue3.value == 0)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 6000);
             }
             else if (actionDetail1 >= 6000 && actionDetail1 < 7000)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
             }
             else if (actionDetail1 >= 3000)
             {
@@ -110,13 +110,13 @@ public class IfForAllAction : ActionParameter
             {
                 var arr = new[] { 35, 67, 71 };
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
-                    actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+                    actionDetail2 % 10, targetParameter.BuildTargetClause(true), arr[actionDetail1 % 100]);
             }
             else if (actionDetail1 >= 1500)
             {
-                var arr = new[] { 35, 67, 71 };
+                _ = new[] { 35, 67, 71 };
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_in_state_of_ID_d3"),
-                    actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+                    actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 % 100);
             }
         }
         else if (actionDetail3 == 0)
@@ -128,10 +128,10 @@ public class IfForAllAction : ActionParameter
         {
             if (actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1700 || actionDetail1 == 1601)
             {
-                IfType ifType = (IfType)actionDetail1;
+                IfType? ifType = (IfType)actionDetail1;
                 if (ifType != null)
                     falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_s3"),
-                            actionDetail3 % 100, targetParameter.buildTargetClause(true), ifType.description());
+                            actionDetail3 % 100, targetParameter.BuildTargetClause(true), ifType.description());
             }
             else if (actionDetail1 >= 0 && actionDetail1 < 100)
             {
@@ -141,42 +141,42 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 >= 500 && actionDetail1 <= 512)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_does_not_have_s3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(), ifType.description());
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(), ifType.description());
             }
             else if (actionDetail1 == 599)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_has_no_dot_debuff"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause());
+                        actionDetail3 % 10, targetParameter.BuildTargetClause());
             }
             else if (actionDetail1 >= 600 && actionDetail1 < 700)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 600, (int)actionValue3.value);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 600, (int)actionValue3.value);
             }
             else if (actionDetail1 == 700)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_not_alone"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true));
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true));
             }
             else if (actionDetail1 >= 701 && actionDetail1 < 710)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_the_count_of_s2_except_stealth_units_is_not_d3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(), actionDetail1 - 700);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(), actionDetail1 - 700);
             }
             else if (actionDetail1 == 720)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_among_s2_does_not_exists_unit_ID_d3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(), (int)actionValue3.value);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(), (int)actionValue3.value);
             }
             else if (actionDetail1 == 721)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true), (int)actionValue3.value);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true), (int)actionValue3.value);
             }
             else if (actionDetail1 >= 901 && actionDetail1 < 1000)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_HP_is_not_below_d3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 900);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 900);
             }
             else if (actionDetail1 == 1000)
             {
@@ -196,17 +196,17 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 == 1800)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("Performs_d1_if_s2_is_not_a_multi_target_unit"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause());
+                        actionDetail3 % 10, targetParameter.BuildTargetClause());
             }
             else if (actionDetail1 >= 6000 && actionDetail1 < 7000 && actionValue3.value == 0)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 6000);
             }
             else if (actionDetail1 >= 6000 && actionDetail1 < 7000)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4"),
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(true), actionDetail1 - 6000, (int)actionValue3.value);
             }
             else if (actionDetail1 >= 3000)
             {
@@ -218,13 +218,13 @@ public class IfForAllAction : ActionParameter
             {
                 var arr = new[] { 35, 67, 71 };
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
-                    actionDetail2 % 10, targetParameter.buildTargetClause(true), arr[actionDetail1 % 100]);
+                    actionDetail2 % 10, targetParameter.BuildTargetClause(true), arr[actionDetail1 % 100]);
             }
             else if (actionDetail1 >= 1500)
             {
-                var arr = new[] { 35, 67, 71 };
+                _ = new[] { 35, 67, 71 };
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_in_state_of_ID_d3"),
-                    actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 % 100);
+                    actionDetail2 % 10, targetParameter.BuildTargetClause(true), actionDetail1 % 100);
             }
         }
         else if (actionDetail2 == 0)
@@ -235,7 +235,7 @@ public class IfForAllAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         if (trueClause != null && falseClause != null)
         {
@@ -251,7 +251,7 @@ public class IfForAllAction : ActionParameter
         }
         else
         {
-            return base.localizedDetail(level, property);
+            return base.LocalizedDetail(level, property);
         }
     }
 }

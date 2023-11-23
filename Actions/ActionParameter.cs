@@ -21,199 +21,106 @@ namespace ActionParameterSerializer.Actions;
 
 public class ActionParameter
 {
-    public static ActionParameter type(int rawType)
+    public static ActionParameter Type(int rawType)
     {
-        switch (rawType)
+        return rawType switch
         {
-            case 1:
-                return new DamageAction();
-            case 2:
-                return new MoveAction();
-            case 3:
-                return new KnockAction();
-            case 4:
-                return new HealAction();
-            case 5:
-                return new CureAction();
-            case 6:
-                return new BarrierAction();
-            case 7:
-                return new ReflexiveAction();
-            case 8:
-            case 9:
-            case 12:
-            case 13:
-                return new AilmentAction();
-            case 10:
-                return new AuraAction();
-            case 11:
-                return new CharmAction();
-            case 14:
-                return new ModeChangeAction();
-            case 15:
-                return new SummonAction();
-            case 16:
-                return new ChangeEnergyAction();
-            case 17:
-                return new TriggerAction();
-            case 18:
-                return new DamageChargeAction();
-            case 19:
-                return new ChargeAction();
-            case 20:
-                return new DecoyAction();
-            case 21:
-                return new NoDamageAction();
-            case 22:
-                return new ChangePatternAction();
-            case 23:
-                return new IfForChildrenAction();
-            case 24:
-                return new RevivalAction();
-            case 25:
-                return new ContinuousAttackAction();
-            case 26:
-                return new AdditiveAction();
-            case 27:
-                return new MultipleAction();
-            case 28:
-                return new IfForAllAction();
-            case 29:
-                return new SearchAreaChangeAction();
-            case 30:
-                return new DestroyAction();
-            case 31:
-                return new ContinuousAttackNearbyAction();
-            case 32:
-                return new EnchantLifeStealAction();
-            case 33:
-                return new EnchantStrikeBackAction();
-            case 34:
-                return new AccumulativeDamageAction();
-            case 35:
-                return new SealAction();
-            case 36:
-                return new AttackFieldAction();
-            case 37:
-                return new HealFieldAction();
-            case 38:
-                return new ChangeParameterFieldAction();
-            case 39:
-                return new AbnormalStateFieldAction();
-            case 40:
-                return new ChangeSpeedFieldAction();
-            case 41:
-                return new UBChangeTimeAction();
-            case 42:
-                return new LoopTriggerAction();
-            case 43:
-                return new IfHasTargetAction();
-            case 44:
-                return new WaveStartIdleAction();
-            case 45:
-                return new SkillExecCountAction();
-            case 46:
-                return new RatioDamageAction();
-            case 47:
-                return new UpperLimitAttackAction();
-            case 48:
-                return new RegenerationAction();
-            case 49:
-                return new DispelAction();
-            case 50:
-                return new ChannelAction();
-            case 52:
-                return new ChangeBodyWidthAction();
-            case 53:
-                return new IFExistsFieldForAllAction();
-            case 54:
-                return new StealthAction();
-            case 55:
-                return new MovePartsAction();
-            case 56:
-                return new CountBlindAction();
-            case 57:
-                return new CountDownAction();
-            case 58:
-                return new StopFieldAction();
-            case 59:
-                return new InhibitHealAction();
-            case 60:
-                return new AttackSealAction();
-            case 61:
-                return new FearAction();
-            case 62:
-                return new AweAction();
-            case 63:
-                return new LoopMotionRepeatAction();
-            case 69:
-                return new ToadAction();
-            case 71:
-                return new KnightGuardAction();
-            case 72:
-                return new DamageCutAction();
-            case 73:
-                return new LogBarrierAction();
-            case 74:
-                return new DivideAction();
-            case 75:
-                return new ActionByHitCountAction();
-            case 76:
-                return new HealDownAction();
-            case 77:
-                return new PassiveSealAction();
-            case 78:
-                return new PassiveDamageUpAction();
-            case 79:
-                return new DamageByBehaviourAction();
-            case 83:
-                return new ChangeSpeedOverlapAction();
-            case 90:
-                return new PassiveAction();
-            case 91:
-                return new PassiveInermittentAction();
-            case 92:
-                return new ChangeEnergyRecoveryRatioByDamageAction();
-            case 93:
-                return new IgnoreDecoyAction();
-            case 94:
-                return new EffectAction();
-            case 95:
-                return new SpyAction();
-            case 96:
-                return new ChangeEnergyFieldAction();
-            case 97:
-                return new ChargeEnergyByDamageAction();
-            case 98:
-                return new EnergyDamageReduceAction();
-            case 99:
-                return new ChangeSpeedOverwriteFieldAction();
-            case 100:
-                return new UnableStateGuardAction();
-            case 101:
-                return new AttackSealActionForAllEnemy();
-            case 102:
-                return new AccumulativeDamageActionForAllEnemy();
-            case 103:
-                return new CopyAtkParamAction();
-            case 104:
-                return new EveryAttackCriticalAction();
-            case 105:
-                return new EnvironmentAction();
-            case 106:
-                return new ProtectAction();
-            case 107:
-                return new ChangeCriticalReferenceAction();
-            case 108:
-                return new IfContainsUnitGroupAction();
+            1 => new DamageAction(),
+            2 => new MoveAction(),
+            3 => new KnockAction(),
+            4 => new HealAction(),
+            5 => new CureAction(),
+            6 => new BarrierAction(),
+            7 => new ReflexiveAction(),
+            8 or 9 or 12 or 13 => new AilmentAction(),
+            10 => new AuraAction(),
+            11 => new CharmAction(),
+            14 => new ModeChangeAction(),
+            15 => new SummonAction(),
+            16 => new ChangeEnergyAction(),
+            17 => new TriggerAction(),
+            18 => new DamageChargeAction(),
+            19 => new ChargeAction(),
+            20 => new DecoyAction(),
+            21 => new NoDamageAction(),
+            22 => new ChangePatternAction(),
+            23 => new IfForChildrenAction(),
+            24 => new RevivalAction(),
+            25 => new ContinuousAttackAction(),
+            26 => new AdditiveAction(),
+            27 => new MultipleAction(),
+            28 => new IfForAllAction(),
+            29 => new SearchAreaChangeAction(),
+            30 => new DestroyAction(),
+            31 => new ContinuousAttackNearbyAction(),
+            32 => new EnchantLifeStealAction(),
+            33 => new EnchantStrikeBackAction(),
+            34 => new AccumulativeDamageAction(),
+            35 => new SealAction(),
+            36 => new AttackFieldAction(),
+            37 => new HealFieldAction(),
+            38 => new ChangeParameterFieldAction(),
+            39 => new AbnormalStateFieldAction(),
+            40 => new ChangeSpeedFieldAction(),
+            41 => new UBChangeTimeAction(),
+            42 => new LoopTriggerAction(),
+            43 => new IfHasTargetAction(),
+            44 => new WaveStartIdleAction(),
+            45 => new SkillExecCountAction(),
+            46 => new RatioDamageAction(),
+            47 => new UpperLimitAttackAction(),
+            48 => new RegenerationAction(),
+            49 => new DispelAction(),
+            50 => new ChannelAction(),
+            52 => new ChangeBodyWidthAction(),
+            53 => new IFExistsFieldForAllAction(),
+            54 => new StealthAction(),
+            55 => new MovePartsAction(),
+            56 => new CountBlindAction(),
+            57 => new CountDownAction(),
+            58 => new StopFieldAction(),
+            59 => new InhibitHealAction(),
+            60 => new AttackSealAction(),
+            61 => new FearAction(),
+            62 => new AweAction(),
+            63 => new LoopMotionRepeatAction(),
+            69 => new ToadAction(),
+            71 => new KnightGuardAction(),
+            72 => new DamageCutAction(),
+            73 => new LogBarrierAction(),
+            74 => new DivideAction(),
+            75 => new ActionByHitCountAction(),
+            76 => new HealDownAction(),
+            77 => new PassiveSealAction(),
+            78 => new PassiveDamageUpAction(),
+            79 => new DamageByBehaviourAction(),
+            83 => new ChangeSpeedOverlapAction(),
+            90 => new PassiveAction(),
+            91 => new PassiveInermittentAction(),
+            92 => new ChangeEnergyRecoveryRatioByDamageAction(),
+            93 => new IgnoreDecoyAction(),
+            94 => new EffectAction(),
+            95 => new SpyAction(),
+            96 => new ChangeEnergyFieldAction(),
+            97 => new ChargeEnergyByDamageAction(),
+            98 => new EnergyDamageReduceAction(),
+            99 => new ChangeSpeedOverwriteFieldAction(),
+            100 => new UnableStateGuardAction(),
+            101 => new AttackSealActionForAllEnemy(),
+            102 => new AccumulativeDamageActionForAllEnemy(),
+            103 => new CopyAtkParamAction(),
+            104 => new EveryAttackCriticalAction(),
+            105 => new EnvironmentAction(),
+            106 => new ProtectAction(),
+            107 => new ChangeCriticalReferenceAction(),
+            108 => new IfContainsUnitGroupAction(),
             /*
-            case 901:
-                return new ExStartPassiveAction();
-            case 902:
-                return new ExConditionPassiveAction();*/
-            default:
-                return new ActionParameter();
-        }
+case 901:
+return new ExStartPassiveAction();
+case 902:
+return new ExConditionPassiveAction();*/
+            _ => new ActionParameter(),
+        };
     }
 
     public bool isEnemySkill;
@@ -233,22 +140,22 @@ public class ActionParameter
     {
         public double value;
         public string description;
-        public eActionValue index;
+        public EActionValue index;
 
-        public DoubleValue(double value, eActionValue index)
+        public DoubleValue(double value, EActionValue index)
         {
             this.value = value;
             this.index = index;
             description = index.description();
         }
 
-        public string valueString()
+        public string ValueString()
         {
             return Utils.roundIfNeed(value);
         }
     }
 
-    public enum eActionValue
+    public enum EActionValue
     {
         VALUE1,
         VALUE2,
@@ -272,7 +179,7 @@ public class ActionParameter
 
     public TargetParameter targetParameter;
 
-    public ActionParameter init(bool isEnemySkill, int actionId, int dependActionId, int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount, SkillAction dependAction, List<SkillAction> childrenAction)
+    public ActionParameter Init(bool isEnemySkill, int actionId, int dependActionId, int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount, SkillAction dependAction, List<SkillAction> childrenAction)
     {
         this.isEnemySkill = isEnemySkill;
         this.actionId = actionId;
@@ -298,13 +205,13 @@ public class ActionParameter
             actionDetails.Add(actionDetail3);
         }
 
-        this.actionValue1 = new DoubleValue(actionValue1, eActionValue.VALUE1);
-        this.actionValue2 = new DoubleValue(actionValue2, eActionValue.VALUE2);
-        this.actionValue3 = new DoubleValue(actionValue3, eActionValue.VALUE3);
-        this.actionValue4 = new DoubleValue(actionValue4, eActionValue.VALUE4);
-        this.actionValue5 = new DoubleValue(actionValue5, eActionValue.VALUE5);
-        this.actionValue6 = new DoubleValue(actionValue6, eActionValue.VALUE6);
-        this.actionValue7 = new DoubleValue(actionValue7, eActionValue.VALUE7);
+        this.actionValue1 = new DoubleValue(actionValue1, EActionValue.VALUE1);
+        this.actionValue2 = new DoubleValue(actionValue2, EActionValue.VALUE2);
+        this.actionValue3 = new DoubleValue(actionValue3, EActionValue.VALUE3);
+        this.actionValue4 = new DoubleValue(actionValue4, EActionValue.VALUE4);
+        this.actionValue5 = new DoubleValue(actionValue5, EActionValue.VALUE5);
+        this.actionValue6 = new DoubleValue(actionValue6, EActionValue.VALUE6);
+        this.actionValue7 = new DoubleValue(actionValue7, EActionValue.VALUE7);
         if (actionValue1 != 0)
         {
             rawActionValues.Add(actionValue1);
@@ -345,17 +252,17 @@ public class ActionParameter
             this.childrenAction = childrenAction;
         }
         targetParameter = new TargetParameter(targetAssignment, targetNumber, targetType, targetRange, targetArea, targetCount, dependAction);
-        childInit();
+        ChildInit();
         return this;
     }
 
-    public virtual void childInit()
+    public virtual void ChildInit()
     {
     }
 
-    private string bracesIfNeeded(string content)
+    private static string BracesIfNeeded(string content)
     {
-        if (content.Contains("+"))
+        if (content.Contains('+'))
         {
             return Utils.JavaFormat("(%s)", content);
         }
@@ -365,7 +272,7 @@ public class ActionParameter
         }
     }
 
-    public virtual string localizedDetail(int level, Property property)
+    public virtual string LocalizedDetail(int level, Property property)
     {
         if (rawActionType == 0)
         {
@@ -373,32 +280,33 @@ public class ActionParameter
         }
         return Utils.JavaFormat(Utils.GetString("Unknown_effect_d1_to_s2_with_details_s3_values_s4"),
                 rawActionType,
-                targetParameter.buildTargetClause(),
+                targetParameter.BuildTargetClause(),
                 string.Join(",", actionDetails),
                 string.Join(",", rawActionValues));
     }
 
-    public string buildExpression(int level, Property property)
+    public string BuildExpression(int level, Property property)
     {
-        return buildExpression(level, actionValues, null, property, false, false, false);
+        return BuildExpression(level, actionValues, null, property, false, false, false);
     }
 
-    public string buildExpression(int level, RoundingMode? roundingMode, Property property)
+    public string BuildExpression(int level, RoundingMode? roundingMode, Property property)
     {
-        return buildExpression(level, actionValues, roundingMode, property, false, false, false);
+        return BuildExpression(level, actionValues, roundingMode, property, false, false, false);
     }
 
-    public string buildExpression(int level, List<ActionValue> actionValues, RoundingMode? roundingMode, Property property)
+    public string BuildExpression(int level, List<ActionValue> actionValues, RoundingMode? roundingMode, Property property)
     {
-        return buildExpression(level, actionValues, roundingMode, property, false, false, false);
+        return BuildExpression(level, actionValues, roundingMode, property, false, false, false);
     }
 
-    public String buildExpression(int level, RoundingMode? roundingMode, Property property, bool isConstant)
+    public String BuildExpression(int level, RoundingMode? roundingMode, Property property, bool isConstant)
     {
-        return buildExpression(level, actionValues, roundingMode, property, false, false, false, isConstant);
+        return BuildExpression(level, actionValues, roundingMode, property, false, false, false, isConstant);
     }
 
-    public string buildExpression(int level,
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
+    public string BuildExpression(int level,
                                   List<ActionValue> actionValues,
                                   RoundingMode? roundingMode,
                                   Property property,
@@ -408,27 +316,18 @@ public class ActionParameter
                                   params bool[] redundancy)
     {
         bool isConstant = redundancy.Length > 0 && redundancy[0];
-        if (actionValues == null)
-        {
-            actionValues = this.actionValues;
-        }
+        actionValues ??= this.actionValues;
 
-        if (roundingMode == null)
-        {
-            roundingMode = RoundingMode.DOWN;
-        }
+        roundingMode ??= RoundingMode.DOWN;
 
-        if (property == null)
-        {
-            property = new Property();
-        }
+        property ??= new Property();
 
         if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_EXPRESSION)
         {
-            StringBuilder expression = new StringBuilder();
+            StringBuilder expression = new();
             foreach (ActionValue value in actionValues)
             {
-                StringBuilder part = new StringBuilder();
+                StringBuilder part = new();
                 if (value.initial != null && value.perLevel != null)
                 {
                     double initialValue = double.Parse(value.initial);
@@ -486,15 +385,15 @@ public class ActionParameter
             else
             {
                 expression.RemoveRange(expression.ToString().LastIndexOf(" +"), expression.Length);
-                return hasBracesIfNeeded ? bracesIfNeeded(expression.ToString()) : expression.ToString();
+                return hasBracesIfNeeded ? BracesIfNeeded(expression.ToString()) : expression.ToString();
             }
         }
         else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL && !isConstant)
         {
-            StringBuilder expression = new StringBuilder();
+            StringBuilder expression = new();
             foreach (ActionValue value in actionValues)
             {
-                StringBuilder part = new StringBuilder();
+                StringBuilder part = new();
                 if (value.initial != null && value.perLevel != null)
                 {
                     double initialValue = double.Parse(value.initial);
@@ -553,7 +452,7 @@ public class ActionParameter
             else
             {
                 expression.RemoveRange(expression.ToString().LastIndexOf(" +"), expression.Length);
-                return hasBracesIfNeeded ? bracesIfNeeded(expression.ToString()) : expression.ToString();
+                return hasBracesIfNeeded ? BracesIfNeeded(expression.ToString()) : expression.ToString();
             }
         }
         else
@@ -570,13 +469,13 @@ public class ActionParameter
                 }
                 if (value.key != null)
                 {
-                    part = part * ((property.getItem(value.key)));
+                    part *= ((property.getItem(value.key)));
                 }
                 //                int num = (int)part;
                 //                if (UnitUtils.Companion.approximately(part, (double)num)) {
                 //                    part = num;
                 //                }
-                fixedValue = fixedValue + (part);
+                fixedValue += (part);
             }
             if (roundingMode == RoundingMode.UNNECESSARY)
             {
@@ -589,11 +488,11 @@ public class ActionParameter
 
     public List<ActionValue> actionValues = new();
 
-    public void setActionValues(List<ActionValue> actionValues)
+    public void SetActionValues(List<ActionValue> actionValues)
     {
         this.actionValues = actionValues;
     }
-    public List<ActionValue> getActionValues()
+    public List<ActionValue> GetActionValues()
     {
         return actionValues;
     }
@@ -610,12 +509,12 @@ public class ActionParameter
         {
             initialValue = initial;
             perLevelValue = perLevel;
-            this.initial = initial.valueString();
-            this.perLevel = perLevel.valueString();
+            this.initial = initial.ValueString();
+            this.perLevel = perLevel.ValueString();
             this.key = key;
         }
 
-        public ActionValue(double initial, double perLevel, eActionValue vInitial, eActionValue vPerLevel, PropertyKey? key)
+        public ActionValue(double initial, double perLevel, EActionValue vInitial, EActionValue vPerLevel, PropertyKey? key)
         {
             initialValue = new DoubleValue(initial, vInitial);
             perLevelValue = new DoubleValue(perLevel, vPerLevel);

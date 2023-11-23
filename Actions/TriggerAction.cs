@@ -27,37 +27,27 @@ public class TriggerAction : ActionParameter
     private TriggerType triggerType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         triggerType = (TriggerType)(actionDetail1);
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (triggerType)
+        return triggerType switch
         {
-            case TriggerType.hp:
-                return Utils.JavaFormat(Utils.GetString("Trigger_HP_is_below_d"), Math.Round(actionValue3.value));
-            case TriggerType.limitTime:
-                return Utils.JavaFormat(Utils.GetString("Trigger_Left_time_is_below_s_sec"), Math.Round(actionValue3.value));
-            case TriggerType.damage:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_damaged"), Math.Round(actionValue1.value));
-            case TriggerType.dead:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_dead"), Math.Round(actionValue1.value));
-            case TriggerType.critical:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_critical_damaged"), Math.Round(actionValue1.value));
-            case TriggerType.stealthFree:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_stealth"), Math.Round(actionValue1.value));
-            case TriggerType.Break:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d1_on_break_and_last_for_s2_sec"), Math.Round(actionValue1.value), actionValue3.value);
-            case TriggerType.dot:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_dot_damaged"), Math.Round(actionValue1.value));
-            case TriggerType.allBreak:
-                return Utils.JavaFormat(Utils.GetString("Trigger_d_on_all_targets_break"),
-                        Math.Round(actionValue1.value));
-            default:
-                return base.localizedDetail(level, property);
-        }
+            TriggerType.hp => Utils.JavaFormat(Utils.GetString("Trigger_HP_is_below_d"), Math.Round(actionValue3.value)),
+            TriggerType.limitTime => Utils.JavaFormat(Utils.GetString("Trigger_Left_time_is_below_s_sec"), Math.Round(actionValue3.value)),
+            TriggerType.damage => Utils.JavaFormat(Utils.GetString("Trigger_d_on_damaged"), Math.Round(actionValue1.value)),
+            TriggerType.dead => Utils.JavaFormat(Utils.GetString("Trigger_d_on_dead"), Math.Round(actionValue1.value)),
+            TriggerType.critical => Utils.JavaFormat(Utils.GetString("Trigger_d_on_critical_damaged"), Math.Round(actionValue1.value)),
+            TriggerType.stealthFree => Utils.JavaFormat(Utils.GetString("Trigger_d_on_stealth"), Math.Round(actionValue1.value)),
+            TriggerType.Break => Utils.JavaFormat(Utils.GetString("Trigger_d1_on_break_and_last_for_s2_sec"), Math.Round(actionValue1.value), actionValue3.value),
+            TriggerType.dot => Utils.JavaFormat(Utils.GetString("Trigger_d_on_dot_damaged"), Math.Round(actionValue1.value)),
+            TriggerType.allBreak => Utils.JavaFormat(Utils.GetString("Trigger_d_on_all_targets_break"),
+                                    Math.Round(actionValue1.value)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

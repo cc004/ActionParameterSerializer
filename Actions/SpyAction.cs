@@ -16,24 +16,24 @@ public class SpyAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         cancelType = (CancelType)actionDetail2;
         durationValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (cancelType)
         {
             case CancelType.Damaged:
                 return Utils.JavaFormat(Utils.GetString("Make_s1_invisible_for_s2_cancels_on_taking_damage"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, actionValues, null, property));
+                        targetParameter.BuildTargetClause(),
+                        BuildExpression(level, actionValues, null, property));
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

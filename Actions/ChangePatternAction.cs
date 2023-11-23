@@ -8,13 +8,13 @@ namespace ActionParameterSerializer.Actions;
 public class ChangePatternAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (actionDetail1)
         {
@@ -33,7 +33,7 @@ public class ChangePatternAction : ActionParameter
                 return Utils.JavaFormat(Utils.GetString("Change_skill_visual_effect_for_s_sec"),
                         Utils.roundDouble(actionValue1.value));
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

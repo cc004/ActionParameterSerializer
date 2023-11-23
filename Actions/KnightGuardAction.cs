@@ -21,9 +21,9 @@ public class KnightGuardAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         guardType = (GuardType)((int)actionValue1.value);
         switch (guardType)
         {
@@ -40,11 +40,11 @@ public class KnightGuardAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("When_s1_HP_reaches_0_restore_s2_HP_once_in_next_s3_sec"),
-                targetParameter.buildTargetClause(),
-                buildExpression(level, property),
-                buildExpression(level, durationValues, null, property));
+                targetParameter.BuildTargetClause(),
+                BuildExpression(level, property),
+                BuildExpression(level, durationValues, null, property));
     }
 }

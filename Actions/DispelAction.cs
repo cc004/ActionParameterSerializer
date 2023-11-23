@@ -24,19 +24,19 @@ public class DispelAction : ActionParameter
     public List<ActionValue> chanceValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         dispelType = (DispelType)(actionDetail1);
         chanceValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Clear_all_s1_on_s2_with_chance_s3"),
                 dispelType.description(),
-                targetParameter.buildTargetClause(),
-                buildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property));
+                targetParameter.BuildTargetClause(),
+                BuildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property));
     }
 }

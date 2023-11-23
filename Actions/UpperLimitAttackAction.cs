@@ -7,15 +7,15 @@ namespace ActionParameterSerializer.Actions;
 public class UpperLimitAttackAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("s_Damage_is_reduced_on_low_level_players"),
-                base.localizedDetail(level, property));
+                base.LocalizedDetail(level, property));
     }
 }

@@ -7,14 +7,14 @@ namespace ActionParameterSerializer.Actions;
 public class IgnoreDecoyAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Ignore_the_other_units_taunt_when_attacking_s"), targetParameter.buildTargetClause());
+        return Utils.JavaFormat(Utils.GetString("Ignore_the_other_units_taunt_when_attacking_s"), targetParameter.BuildTargetClause());
     }
 }

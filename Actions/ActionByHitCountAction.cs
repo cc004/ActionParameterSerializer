@@ -25,14 +25,14 @@ public class ActionByHitCountAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         conditionType = (ConditionType)(actionDetail1);
         durationValues.Add(new ActionValue(actionValue3, actionValue4, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         string limitation;
         if (actionValue5.value > 0)
@@ -50,10 +50,10 @@ public class ActionByHitCountAction : ActionParameter
                     actionDetail2 % 10,
                     limitation,
                     Utils.roundIfNeed(actionValue1.value),
-                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
+                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
                 );
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

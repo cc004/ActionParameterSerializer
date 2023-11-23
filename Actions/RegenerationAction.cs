@@ -24,7 +24,7 @@ public class RegenerationAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         healClass = (ClassModifier)(actionDetail1);
         regenerationType = (RegenerationType)(actionDetail2);
@@ -43,12 +43,12 @@ public class RegenerationAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_per_second_for_s4_sec"),
-                targetParameter.buildTargetClause(),
-                buildExpression(level, property),
+                targetParameter.BuildTargetClause(),
+                BuildExpression(level, property),
                 regenerationType.description(),
-                buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

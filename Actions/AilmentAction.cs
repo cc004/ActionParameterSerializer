@@ -19,7 +19,7 @@ public class AilmentAction : ActionParameter
     private List<ActionValue> durationValues;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         ailment = new Ailment(rawActionType, actionDetail1);
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
@@ -28,7 +28,7 @@ public class AilmentAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (ailment.ailmentType)
         {
@@ -49,35 +49,35 @@ public class AilmentAction : ActionParameter
                         if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL)
                         {
                             str = Utils.JavaFormat(Utils.GetString("Multiple_attack_speed_of_s1_with_s2_for_s3_sec"),
-                                    targetParameter.buildTargetClause(),
-                                    buildExpression(level, actionValues, RoundingMode.UNNECESSARY, property) + " * 100",
-                                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, actionValues, RoundingMode.UNNECESSARY, property) + " * 100",
+                                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
                             );
                         }
                         else
                         {
                             str = Utils.JavaFormat(Utils.GetString("Multiple_attack_speed_of_s1_with_s2_for_s3_sec"),
-                                    targetParameter.buildTargetClause(),
-                                    Utils.roundIfNeed(double.Parse(buildExpression(level, actionValues, RoundingMode.UNNECESSARY, property)) * 100),
-                                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
+                                    targetParameter.BuildTargetClause(),
+                                    Utils.roundIfNeed(double.Parse(BuildExpression(level, actionValues, RoundingMode.UNNECESSARY, property)) * 100),
+                                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
                             );
                         }
                         break;
                     case Ailment.ActionDetail.sleep:
                         str = Utils.JavaFormat(Utils.GetString("Make_s1_fall_asleep_for_s2_sec"),
-                                targetParameter.buildTargetClause(), buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                                targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                         break;
                     case Ailment.ActionDetail.faint:
                         str = Utils.JavaFormat(Utils.GetString("Make_s1_fall_into_faint_for_s2_sec"),
-                                targetParameter.buildTargetClause(), buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                                targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                         break;
                     case Ailment.ActionDetail.timeStop:
                         str = Utils.JavaFormat(Utils.GetString("Stop_s1_for_s2_sec"),
-                                targetParameter.buildTargetClause(), buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                                targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                         break;
                     default:
                         str = Utils.JavaFormat(Utils.GetString("s1_s2_for_s3_sec"),
-                                ailment.description(), targetParameter.buildTargetClause(), buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                                ailment.description(), targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                         break;
                 }
                 if (actionDetail2 == 1)
@@ -86,35 +86,28 @@ public class AilmentAction : ActionParameter
                 }
                 return str;
             case Ailment.AilmentType.dot:
-                string r;
-                switch ((Ailment.DotDetail)ailment.ailmentDetail.detail)
+                string r = (Ailment.DotDetail)ailment.ailmentDetail.detail switch
                 {
-                    case Ailment.DotDetail.poison:
-                        r = Utils.JavaFormat(Utils.GetString("Poison_s1_and_deal_s2_damage_per_second_for_s3_sec"),
-                                targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
-                        break;
-                    case Ailment.DotDetail.violentPoison:
-                        r = Utils.JavaFormat(Utils.GetString("Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec"),
-                                targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
-                        break;
-                    default:
-                        r = Utils.JavaFormat(Utils.GetString("s1_s2_and_deal_s3_damage_per_second_for_s4_sec"),
-                                ailment.description(), targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
-                        break;
-                }
+                    Ailment.DotDetail.poison => Utils.JavaFormat(Utils.GetString("Poison_s1_and_deal_s2_damage_per_second_for_s3_sec"),
+                                                    targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
+                    Ailment.DotDetail.violentPoison => Utils.JavaFormat(Utils.GetString("Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec"),
+                                                    targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
+                    _ => Utils.JavaFormat(Utils.GetString("s1_s2_and_deal_s3_damage_per_second_for_s4_sec"),
+                                                    ailment.description(), targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
+                };
                 if (actionValue5.value > 0)
                 {
-                    r += Utils.JavaFormat(Utils.GetString("DMG_shall_be_increased_by_s_percents_of_base_DMG_through_each_tick"), actionValue5.valueString());
+                    r += Utils.JavaFormat(Utils.GetString("DMG_shall_be_increased_by_s_percents_of_base_DMG_through_each_tick"), actionValue5.ValueString());
                 }
                 return r;
             case Ailment.AilmentType.silence:
                 return Utils.JavaFormat(Utils.GetString("Silence_s1_with_s2_chance_for_s3_sec"),
-                        targetParameter.buildTargetClause(), buildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), buildExpression(level, property));
+                        targetParameter.BuildTargetClause(), BuildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), BuildExpression(level, property));
             case Ailment.AilmentType.darken:
                 return Utils.JavaFormat(Utils.GetString("Blind_s1_with_s2_chance_for_s3_sec_physical_attack_has_d4_chance_to_miss"),
-                        targetParameter.buildTargetClause(), buildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), buildExpression(level, RoundingMode.UNNECESSARY, property), 100 - actionDetail1);
+                        targetParameter.BuildTargetClause(), BuildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), BuildExpression(level, RoundingMode.UNNECESSARY, property), 100 - actionDetail1);
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

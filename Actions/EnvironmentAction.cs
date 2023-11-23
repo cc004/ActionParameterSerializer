@@ -10,13 +10,13 @@ public class EnvironmentAction : ActionParameter
     }
 
     private EnvironmentType environmentType;
-    public override void childInit()
+    public override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         environmentType = (EnvironmentType) actionDetail2;
     }
 
-    public override string localizedDetail(int level, Property property)
+    public override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Summon_field_of_s1_environment_for_s2_sec"),
             environmentType.description(),

@@ -14,21 +14,21 @@ public class ChangeSpeedOverwriteFieldAction : ActionParameter
     private SpeedChangeType speedChangeType;
     public List<ActionValue> durationValues = new();
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         speedChangeType = (SpeedChangeType)(actionDetail1);
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
         durationValues.Add(new ActionValue(actionValue3, actionValue4, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Deploys_a_filed_of_radius_d1_which_s2_attack_speed_of_s3_for_s4_sec"),
                 (int)actionValue5.value,
                 speedChangeType.description(),
-                Utils.roundDouble(double.Parse(buildExpression(level, RoundingMode.UNNECESSARY, property, true)) * 100),
-                buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                Utils.roundDouble(double.Parse(BuildExpression(level, RoundingMode.UNNECESSARY, property, true)) * 100),
+                BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

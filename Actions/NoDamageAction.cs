@@ -24,31 +24,27 @@ public class NoDamageAction : ActionParameter
     private NoDamageType noDamageType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         noDamageType = (NoDamageType)(actionDetail1);
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (noDamageType)
+        return noDamageType switch
         {
-            case NoDamageType.noDamage:
-                return Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_for_s2_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, RoundingMode.UNNECESSARY, property));
-            case NoDamageType.dodgePhysics:
-                return Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_to_physical_damage_for_s2_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, RoundingMode.UNNECESSARY, property));
-            case NoDamageType.Break:
-                return Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_to_break_for_s2_sec"),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, RoundingMode.UNNECESSARY, property));
-            default:
-                return base.localizedDetail(level, property);
-        }
+            NoDamageType.noDamage => Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_for_s2_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, RoundingMode.UNNECESSARY, property)),
+            NoDamageType.dodgePhysics => Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_to_physical_damage_for_s2_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, RoundingMode.UNNECESSARY, property)),
+            NoDamageType.Break => Utils.JavaFormat(Utils.GetString("Make_s1_to_be_invulnerable_to_break_for_s2_sec"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, RoundingMode.UNNECESSARY, property)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

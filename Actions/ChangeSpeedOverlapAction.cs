@@ -23,7 +23,7 @@ public class ChangeSpeedOverlapAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         speedChangeType = (SpeedChangeType)(actionDetail1);
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
@@ -31,32 +31,32 @@ public class ChangeSpeedOverlapAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         try
         {
             if (speedChangeType == SpeedChangeType.slow)
             {
                 return Utils.JavaFormat(Utils.GetString("Decrease_s1_ATK_SPD_by_s2_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        ((double.Parse(buildExpression(level, RoundingMode.UNNECESSARY, property))) * ((100.0))).ToString(),
-                        buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                        targetParameter.BuildTargetClause(),
+                        ((double.Parse(BuildExpression(level, RoundingMode.UNNECESSARY, property))) * ((100.0))).ToString(),
+                        BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
             }
             else if (speedChangeType == SpeedChangeType.haste)
             {
                 return Utils.JavaFormat(Utils.GetString("Increase_s1_ATK_SPD_by_s2_for_s3_sec"),
-                        targetParameter.buildTargetClause(),
-                        ((double.Parse(buildExpression(level, RoundingMode.UNNECESSARY, property))) * ((100.0))).ToString(),
-                        buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                        targetParameter.BuildTargetClause(),
+                        ((double.Parse(BuildExpression(level, RoundingMode.UNNECESSARY, property))) * ((100.0))).ToString(),
+                        BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
             }
             else
             {
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
             }
         }
         catch (Exception)
         {
-            return base.localizedDetail(level, property);
+            return base.LocalizedDetail(level, property);
         }
     }
 }

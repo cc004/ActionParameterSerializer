@@ -9,7 +9,7 @@ internal class PassiveDamageUpAction : ActionParameter
     public eEffectType effectType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         debuffDamageUpLimitValue = actionValue2.value;
         debuffDamageUpValue = actionValue1.value;
@@ -20,21 +20,21 @@ internal class PassiveDamageUpAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (countType)
         {
             case eCountType.Debuff:
                 return Utils.JavaFormat(Utils.GetString("Make_s1_damage_changes_into_s234_times_caps_to_s5_times_dur_s6_sec"),
-                        targetParameter.buildTargetClause(),
+                        targetParameter.BuildTargetClause(),
                         effectType.description(),
                         Utils.roundIfNeed(debuffDamageUpValue),
                         countType.description(),
                         Utils.roundIfNeed(debuffDamageUpLimitValue),
-                        buildExpression(level, property)
+                        BuildExpression(level, property)
                 );
             default:
-                return localizedDetail(level, property);
+                return LocalizedDetail(level, property);
         }
     }
 

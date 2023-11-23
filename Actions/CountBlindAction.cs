@@ -19,25 +19,22 @@ public class CountBlindAction : ActionParameter
     public CountType countType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         countType = (CountType)((int)actionValue1.value);
         actionValues.Add(new ActionValue(actionValue2, actionValue3, null));
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (countType)
+        return countType switch
         {
-            case CountType.time:
-                return Utils.JavaFormat(Utils.GetString("In_nex_s1_sec_s2_physical_attacks_will_miss"),
-                        buildExpression(level, RoundingMode.UNNECESSARY, property), targetParameter.buildTargetClause());
-            case CountType.count:
-                return Utils.JavaFormat(Utils.GetString("In_next_s1_attacks_s2_physical_attacks_will_miss"),
-                        buildExpression(level, property), targetParameter.buildTargetClause());
-            default:
-                return base.localizedDetail(level, property);
-        }
+            CountType.time => Utils.JavaFormat(Utils.GetString("In_nex_s1_sec_s2_physical_attacks_will_miss"),
+                                    BuildExpression(level, RoundingMode.UNNECESSARY, property), targetParameter.BuildTargetClause()),
+            CountType.count => Utils.JavaFormat(Utils.GetString("In_next_s1_attacks_s2_physical_attacks_will_miss"),
+                                    BuildExpression(level, property), targetParameter.BuildTargetClause()),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

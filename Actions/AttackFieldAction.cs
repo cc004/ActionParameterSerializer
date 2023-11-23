@@ -17,9 +17,9 @@ public class AttackFieldAction : ActionParameter
     private readonly List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         damageClass = actionDetail1 % 2 == 0 ? ClassModifier.magical : ClassModifier.physical;
         if (actionDetail1 <= 2)
         {
@@ -45,7 +45,7 @@ public class AttackFieldAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (fieldType)
         {
@@ -54,22 +54,22 @@ public class AttackFieldAction : ActionParameter
                 {
                     return Utils.JavaFormat(Utils.GetString("Summon_a_field_of_radius_d1_to_deal_s2_s3_damage_per_second_for_s4_sec_to_s5"),
                             (int)actionValue7.value,
-                            buildExpression(level, property),
+                            BuildExpression(level, property),
                             damageClass.description(),
-                            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
-                            targetParameter.buildTargetClause());
+                            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
+                            targetParameter.BuildTargetClause());
                 }
                 else
                 {
                     return Utils.JavaFormat(Utils.GetString("Summon_a_field_of_radius_d1_at_position_of_s2_to_deal_s3_s4_damage_per_second_for_s5_sec"),
                             (int)actionValue7.value,
-                            targetParameter.buildTargetClause(),
-                            buildExpression(level, property),
+                            targetParameter.BuildTargetClause(),
+                            BuildExpression(level, property),
                             damageClass.description(),
-                            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

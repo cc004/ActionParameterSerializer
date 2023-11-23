@@ -12,7 +12,7 @@ public class HealAction : ActionParameter
     private PercentModifier percentModifier;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         healClass = (ClassModifier)(actionDetail1);
         percentModifier = (int)actionValue1.value == 2 ? PercentModifier.percent : PercentModifier.number;
@@ -32,8 +32,8 @@ public class HealAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_HP"), targetParameter.buildTargetClause(), buildExpression(level, null, null, property, true, false, false), percentModifier.description());
+        return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_HP"), targetParameter.BuildTargetClause(), BuildExpression(level, null, null, property, true, false, false), percentModifier.description());
     }
 }

@@ -23,17 +23,17 @@ public class MoveAction : ActionParameter
     private MoveType moveType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         moveType = (MoveType)actionDetail1;
     }
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (moveType)
         {
             case MoveType.targetReturn:
-                return Utils.JavaFormat(Utils.GetString("Change_self_position_to_s_then_return"), targetParameter.buildTargetClause());
+                return Utils.JavaFormat(Utils.GetString("Change_self_position_to_s_then_return"), targetParameter.BuildTargetClause());
             case MoveType.absoluteReturn:
                 if (actionValue1.value > 0)
                 {
@@ -45,7 +45,7 @@ public class MoveAction : ActionParameter
                 }
 
             case MoveType.target:
-                return Utils.JavaFormat(Utils.GetString("Change_self_position_to_s"), targetParameter.buildTargetClause());
+                return Utils.JavaFormat(Utils.GetString("Change_self_position_to_s"), targetParameter.BuildTargetClause());
             case MoveType.absolute:
             case MoveType.absoluteWithoutDirection:
                 if (actionValue1.value > 0)
@@ -60,25 +60,25 @@ public class MoveAction : ActionParameter
             case MoveType.targetByVelocity:
                 if (actionValue1.value > 0)
                 {
-                    return Utils.JavaFormat(Utils.GetString("Move_to_s1_in_front_of_s2_with_velocity_s3_sec"), Utils.roundDownDouble(actionValue1.value), targetParameter.buildTargetClause(), actionValue2.valueString());
+                    return Utils.JavaFormat(Utils.GetString("Move_to_s1_in_front_of_s2_with_velocity_s3_sec"), Utils.roundDownDouble(actionValue1.value), targetParameter.BuildTargetClause(), actionValue2.ValueString());
                 }
                 else
                 {
-                    return Utils.JavaFormat(Utils.GetString("Move_to_s1_behind_of_s2_with_velocity_s3_sec"), Utils.roundDownDouble(-actionValue1.value), targetParameter.buildTargetClause(), actionValue2.valueString());
+                    return Utils.JavaFormat(Utils.GetString("Move_to_s1_behind_of_s2_with_velocity_s3_sec"), Utils.roundDownDouble(-actionValue1.value), targetParameter.BuildTargetClause(), actionValue2.ValueString());
                 }
 
             case MoveType.absoluteByVelocity:
                 if (actionValue1.value > 0)
                 {
-                    return Utils.JavaFormat(Utils.GetString("Move_forward_s1_with_velocity_s2_sec"), Utils.roundDownDouble(actionValue1.value), actionValue2.valueString());
+                    return Utils.JavaFormat(Utils.GetString("Move_forward_s1_with_velocity_s2_sec"), Utils.roundDownDouble(actionValue1.value), actionValue2.ValueString());
                 }
                 else
                 {
-                    return Utils.JavaFormat(Utils.GetString("Move_backward_s1_with_velocity_s2_sec"), Utils.roundDownDouble(-actionValue1.value), actionValue2.valueString());
+                    return Utils.JavaFormat(Utils.GetString("Move_backward_s1_with_velocity_s2_sec"), Utils.roundDownDouble(-actionValue1.value), actionValue2.ValueString());
                 }
 
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 

@@ -17,21 +17,19 @@ public class RevivalAction : ActionParameter
     private RevivalType revivalType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         revivalType = (RevivalType)(actionDetail1);
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (revivalType)
+        return revivalType switch
         {
-            case RevivalType.normal:
-                return Utils.JavaFormat(Utils.GetString("Revive_s1_with_d2_HP"),
-                        targetParameter.buildTargetClause(), Math.Round(actionValue2.value * 100));
-            default:
-                return base.localizedDetail(level, property);
-        }
+            RevivalType.normal => Utils.JavaFormat(Utils.GetString("Revive_s1_with_d2_HP"),
+                                    targetParameter.BuildTargetClause(), Math.Round(actionValue2.value * 100)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

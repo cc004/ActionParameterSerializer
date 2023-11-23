@@ -23,7 +23,7 @@ public class DamageCutAction : ActionParameter
     public List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         damageType = (DamageType)actionDetail1;
         actionValues.Add(new ActionValue(actionValue1, actionValue2, null));
@@ -31,27 +31,23 @@ public class DamageCutAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        switch (damageType)
+        return damageType switch
         {
-            case DamageType.Physical:
-                return Utils.JavaFormat(Utils.GetString("Reduce_s1_physical_damage_taken_by_s2_for_s3_sec"),
-                        buildExpression(level, actionValues, null, property),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, durationValues, null, property));
-            case DamageType.Magical:
-                return Utils.JavaFormat(Utils.GetString("Reduce_s1_magical_damage_taken_by_s2_for_s3_sec"),
-                        buildExpression(level, actionValues, null, property),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, durationValues, null, property));
-            case DamageType.All:
-                return Utils.JavaFormat(Utils.GetString("Reduce_s1_all_damage_taken_by_s2_for_s3_sec"),
-                        buildExpression(level, actionValues, null, property),
-                        targetParameter.buildTargetClause(),
-                        buildExpression(level, durationValues, null, property));
-            default:
-                return base.localizedDetail(level, property);
-        }
+            DamageType.Physical => Utils.JavaFormat(Utils.GetString("Reduce_s1_physical_damage_taken_by_s2_for_s3_sec"),
+                                    BuildExpression(level, actionValues, null, property),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, durationValues, null, property)),
+            DamageType.Magical => Utils.JavaFormat(Utils.GetString("Reduce_s1_magical_damage_taken_by_s2_for_s3_sec"),
+                                    BuildExpression(level, actionValues, null, property),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, durationValues, null, property)),
+            DamageType.All => Utils.JavaFormat(Utils.GetString("Reduce_s1_all_damage_taken_by_s2_for_s3_sec"),
+                                    BuildExpression(level, actionValues, null, property),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, durationValues, null, property)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

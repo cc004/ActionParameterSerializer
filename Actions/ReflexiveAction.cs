@@ -18,25 +18,25 @@ public class ReflexiveAction : ActionParameter
     private ReflexiveType reflexiveType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         reflexiveType = (ReflexiveType)(actionDetail1);
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         if (targetParameter.targetType == TargetType.absolute)
         {
-            return Utils.JavaFormat(Utils.GetString("Change_the_perspective_to_s1_d2"), targetParameter.buildTargetClause(), (int)actionValue1.value);
+            return Utils.JavaFormat(Utils.GetString("Change_the_perspective_to_s1_d2"), targetParameter.BuildTargetClause(), (int)actionValue1.value);
         }
         else if (reflexiveType == ReflexiveType.search)
         {
-            return Utils.JavaFormat(Utils.GetString("Scout_and_change_the_perspective_on_s"), targetParameter.buildTargetClause());
+            return Utils.JavaFormat(Utils.GetString("Scout_and_change_the_perspective_on_s"), targetParameter.BuildTargetClause());
         }
         else
         {
-            return Utils.JavaFormat(Utils.GetString("Change_the_perspective_on_s"), targetParameter.buildTargetClause());
+            return Utils.JavaFormat(Utils.GetString("Change_the_perspective_on_s"), targetParameter.BuildTargetClause());
         }
     }
 }

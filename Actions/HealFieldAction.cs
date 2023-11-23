@@ -18,9 +18,9 @@ public class HealFieldAction : ActionParameter
     private readonly List<ActionValue> durationValues = new();
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
         healClass = actionDetail1 % 2 == 0 ? ClassModifier.magical : ClassModifier.physical;
         percentModifier = actionDetail2 == 2 ? PercentModifier.percent : PercentModifier.number;
         if (actionDetail1 <= 2)
@@ -47,7 +47,7 @@ public class HealFieldAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (fieldType)
         {
@@ -56,22 +56,22 @@ public class HealFieldAction : ActionParameter
                 {
                     return Utils.JavaFormat(Utils.GetString("Summon_a_healing_field_of_radius_d1_to_heal_s2_s3_s4_HP_per_second_for_5s_sec"),
                             (int)actionValue7.value,
-                            targetParameter.buildTargetClause(),
-                            buildExpression(level, property),
+                            targetParameter.BuildTargetClause(),
+                            BuildExpression(level, property),
                             percentModifier.description(),
-                            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
                 else
                 {
                     return Utils.JavaFormat(Utils.GetString("Summon_a_healing_field_of_radius_d1_at_position_of_s2_to_heal_s3_s4_HP_per_second_for_s5_sec"),
                             (int)actionValue7.value,
-                            targetParameter.buildTargetClause(),
-                            buildExpression(level, property),
+                            targetParameter.BuildTargetClause(),
+                            BuildExpression(level, property),
                             percentModifier.description(),
-                            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

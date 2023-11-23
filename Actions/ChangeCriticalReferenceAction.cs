@@ -5,7 +5,7 @@ namespace ActionParameterSerializer.Actions;
 
 public class ChangeCriticalReferenceAction : ActionParameter
 {
-    public enum eCriticalReference
+    public enum ECriticalReference
     {
         normal,
         Physical_Critical,
@@ -13,19 +13,19 @@ public class ChangeCriticalReferenceAction : ActionParameter
         sum_critical
     }
 
-    private eCriticalReference refType;
-    private int actionId;
+    private ECriticalReference refType;
+    private new int actionId;
 
-    public override void childInit()
+    public override void ChildInit()
     {
-        base.childInit();
-        refType = (eCriticalReference) actionDetail2;
+        base.ChildInit();
+        refType = (ECriticalReference) actionDetail2;
         actionId = actionDetail1 % 10;
     }
 
-    public override string localizedDetail(int level, Property property)
+    public override string LocalizedDetail(int level, Property property)
     {
-        if (refType == eCriticalReference.normal)
+        if (refType == ECriticalReference.normal)
             return Utils.GetString("no_effect");
         return Utils.JavaFormat(Utils.GetString("Use_critical_reference_s1_for_skill_d2"),
             refType.rawDescription(),

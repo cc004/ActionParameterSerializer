@@ -7,13 +7,13 @@ namespace ActionParameterSerializer.Actions;
 public class IFExistsFieldForAllAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         if (actionDetail2 != 0 && actionDetail3 != 0)
         {
@@ -27,7 +27,7 @@ public class IFExistsFieldForAllAction : ActionParameter
         }
         else
         {
-            return base.localizedDetail(level, property);
+            return base.LocalizedDetail(level, property);
         }
     }
 }

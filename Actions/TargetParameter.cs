@@ -31,7 +31,7 @@ public class TargetParameter
         this.targetCount = (TargetCount)(targetCount);
         if (!Enum.IsDefined(this.targetCount)) this.targetCount = TargetCount.all;
         this.dependAction = dependAction;
-        setBooleans();
+        SetBooleans();
     }
 
     private bool hasRelationPhrase;
@@ -39,8 +39,9 @@ public class TargetParameter
     private bool hasRangePhrase;
     private bool hasNthModifier;
     private bool hasDirectionPhrase;
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>")]
     private bool hasTargetType;
-    private bool hasDependAction()
+    private bool HasDependAction()
     {
         return dependAction != null && (
             dependAction.getActionId() != 0
@@ -49,7 +50,7 @@ public class TargetParameter
         );
     }
 
-    private void setBooleans()
+    private void SetBooleans()
     {
         hasRelationPhrase = targetType != TargetType.self
                 && targetType != TargetType.absolute;
@@ -68,21 +69,21 @@ public class TargetParameter
     }
 
 
-    public string buildTargetClause(bool anyOfModifier)
+    public string BuildTargetClause(bool anyOfModifier)
     {
         if (targetCount.pluralModifier() == PluralModifier.many && anyOfModifier)
         {
-            return Utils.JavaFormat(Utils.GetString("any_of_s"), buildTargetClause());
+            return Utils.JavaFormat(Utils.GetString("any_of_s"), BuildTargetClause());
         }
         else
         {
-            return buildTargetClause();
+            return BuildTargetClause();
         }
     }
 
-    public string buildTargetClause()
+    public string BuildTargetClause()
     {
-        if (hasDependAction())
+        if (HasDependAction())
         {
             if (dependAction.parameter.actionType == ActionType.damage)
             {
@@ -129,39 +130,30 @@ public class TargetParameter
         }
         else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.exclusive)
         {
-            switch (targetAssignment)
+            return targetAssignment switch
             {
-                case TargetAssignment.enemy:
-                    return Utils.JavaFormat(Utils.GetString("all_front_enemy_targets"));
-                case TargetAssignment.friendly:
-                    return Utils.JavaFormat(Utils.GetString("all_front_including_self_friendly_targets"));
-                default:
-                    return Utils.JavaFormat(Utils.GetString("all_front_targets"));
-            }
+                TargetAssignment.enemy => Utils.JavaFormat(Utils.GetString("all_front_enemy_targets")),
+                TargetAssignment.friendly => Utils.JavaFormat(Utils.GetString("all_front_including_self_friendly_targets")),
+                _ => Utils.JavaFormat(Utils.GetString("all_front_targets")),
+            };
         }
         else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.not)
         {
-            switch (targetAssignment)
+            return targetAssignment switch
             {
-                case TargetAssignment.enemy:
-                    return Utils.JavaFormat(Utils.GetString("all_front_s_enemy_targets"), targetType.description());
-                case TargetAssignment.friendly:
-                    return Utils.JavaFormat(Utils.GetString("all_front_including_self_s_friendly_targets"), targetType.description());
-                default:
-                    return Utils.JavaFormat(Utils.GetString("all_front_s_targets"), targetType.description());
-            }
+                TargetAssignment.enemy => Utils.JavaFormat(Utils.GetString("all_front_s_enemy_targets"), targetType.description()),
+                TargetAssignment.friendly => Utils.JavaFormat(Utils.GetString("all_front_including_self_s_friendly_targets"), targetType.description()),
+                _ => Utils.JavaFormat(Utils.GetString("all_front_s_targets"), targetType.description()),
+            };
         }
         else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.halfExclusive)
         {
-            switch (targetAssignment)
+            return targetAssignment switch
             {
-                case TargetAssignment.enemy:
-                    return Utils.JavaFormat(Utils.GetString("all_front_enemy_targets")) + Utils.JavaFormat(Utils.GetString("except_self"));
-                case TargetAssignment.friendly:
-                    return Utils.JavaFormat(Utils.GetString("all_front_including_self_friendly_targets"));
-                default:
-                    return Utils.JavaFormat(Utils.GetString("all_front_targets")) + Utils.JavaFormat(Utils.GetString("except_self"));
-            }
+                TargetAssignment.enemy => Utils.JavaFormat(Utils.GetString("all_front_enemy_targets")) + Utils.JavaFormat(Utils.GetString("except_self")),
+                TargetAssignment.friendly => Utils.JavaFormat(Utils.GetString("all_front_including_self_friendly_targets")),
+                _ => Utils.JavaFormat(Utils.GetString("all_front_targets")) + Utils.JavaFormat(Utils.GetString("except_self")),
+            };
         }
         else if (!hasCountPhrase && !hasNthModifier && hasRangePhrase && hasRelationPhrase && !hasDirectionPhrase)
         {
@@ -235,13 +227,13 @@ public class TargetParameter
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), getUntilNumber().description());
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
                 return Utils.JavaFormat(Utils.GetString("s_s_s"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description());
             }
         }
         else if (hasCountPhrase && hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase)
         {
-            string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), getUntilNumber().description());
+            string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
             return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description());
         }
         else if (hasCountPhrase && hasNthModifier && hasRangePhrase && hasRelationPhrase && !hasDirectionPhrase)
@@ -252,7 +244,7 @@ public class TargetParameter
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), getUntilNumber().description());
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
                 return Utils.JavaFormat(Utils.GetString("s1_s2_s3_in_range_d4"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description(), targetRange.rawRange);
             }
         }
@@ -264,14 +256,14 @@ public class TargetParameter
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), getUntilNumber().description());
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
                 return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3_in_range_d4"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description(), targetRange.rawRange);
             }
         }
         return "";
     }
 
-    private TargetNumber getUntilNumber()
+    private TargetNumber GetUntilNumber()
     {
         TargetNumber tUntil = targetNumber + (int)targetCount;
         if (tUntil == TargetNumber.other || !Enum.IsDefined(tUntil))

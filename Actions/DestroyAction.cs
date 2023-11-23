@@ -7,14 +7,14 @@ namespace ActionParameterSerializer.Actions;
 public class DestroyAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Kill_s_instantly"), targetParameter.buildTargetClause());
+        return Utils.JavaFormat(Utils.GetString("Kill_s_instantly"), targetParameter.BuildTargetClause());
     }
 }

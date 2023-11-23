@@ -11,9 +11,9 @@ public class ChangeEnergyRecoveryRatioByDamageAction : ActionParameter
 {
 
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public string getChildrenActionString()
@@ -31,11 +31,11 @@ public class ChangeEnergyRecoveryRatioByDamageAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("change_energy_recovery_ratio_of_action_s1_to_s2_when_s3_get_damage"),
                 getChildrenActionString(),
-                actionValue1.valueString(),
-                targetParameter.buildTargetClause());
+                actionValue1.ValueString(),
+                targetParameter.BuildTargetClause());
     }
 }

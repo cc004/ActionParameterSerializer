@@ -390,7 +390,7 @@ namespace ActionParameterSerializer
             return GetString("Raise");
         }
 
-        public static string description(this ActionParameter.eActionValue val)
+        public static string description(this ActionParameter.EActionValue val)
         {
             return GetString(val.ToString().ToLower());
         }

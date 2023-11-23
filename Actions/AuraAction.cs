@@ -59,7 +59,7 @@ public class AuraAction : ActionParameter
     public bool isConstant = false;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         percentModifier = (int)actionValue1.value == 2 ? PercentModifier.percent : PercentModifier.number;
         actionValues.Add(new ActionValue(actionValue2, actionValue3, null));
@@ -97,9 +97,9 @@ public class AuraAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        string r = buildExpression(level, RoundingMode.UP, property);
+        string r = BuildExpression(level, RoundingMode.UP, property);
         if (percentModifier == PercentModifier.percent && UserSettings.get().getExpression() != UserSettings.EXPRESSION_VALUE)
         {
             r = Utils.JavaFormat("(%s)", r);
@@ -108,16 +108,16 @@ public class AuraAction : ActionParameter
         {
             case BreakType.Break:
                 return Utils.JavaFormat(Utils.GetString("s1_s2_s3_s4_s5_during_break"),
-                        auraActionType.description(), targetParameter.buildTargetClause(), r, percentModifier.description(), auraType.description());
+                        auraActionType.description(), targetParameter.BuildTargetClause(), r, percentModifier.description(), auraType.description());
             default:
                 {
                     return Utils.JavaFormat(Utils.GetString("s1_s2_s3_s4_s5_for_s6_sec"),
                             auraActionType.description(),
-                            targetParameter.buildTargetClause(),
+                            targetParameter.BuildTargetClause(),
                             r,
                             percentModifier.description(),
                             auraType.description(),
-                            buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
+                            BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
                             isConstant ? Utils.JavaFormat(Utils.GetString("this_buff_is_constant")) : "");
                 }
         }

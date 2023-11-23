@@ -21,7 +21,7 @@ public class DamageAction : ActionParameter
     public DecideTargetAtkType decideTargetAtkType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         damageClass = (ClassModifier)(actionDetail1);
         criticalModifier = Math.Abs((int)actionValue5.value) == 1 ? CriticalModifier.critical : CriticalModifier.normal;
@@ -44,16 +44,16 @@ public class DamageAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        StringBuilder str = new StringBuilder();
+        StringBuilder str = new();
         switch (criticalModifier)
         {
             case CriticalModifier.normal:
-                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3"), buildExpression(level, property), damageClass.description(), targetParameter.buildTargetClause()));
+                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3"), BuildExpression(level, property), damageClass.description(), targetParameter.BuildTargetClause()));
                 break;
             case CriticalModifier.critical:
-                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical"), buildExpression(level, property), damageClass.description(), targetParameter.buildTargetClause(), Utils.roundIfNeed(actionValue5.value)));
+                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical"), BuildExpression(level, property), damageClass.description(), targetParameter.BuildTargetClause(), Utils.roundIfNeed(actionValue5.value)));
                 break;
         }
         if (actionValue6.value != 0)

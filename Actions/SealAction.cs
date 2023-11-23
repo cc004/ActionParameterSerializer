@@ -8,13 +8,13 @@ namespace ActionParameterSerializer.Actions;
 public class SealAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         if (actionValue4.value >= 0)
         {
@@ -22,7 +22,7 @@ public class SealAction : ActionParameter
                     Utils.roundDownDouble(actionValue4.value),
                     Utils.roundDownDouble(actionValue1.value),
                     Utils.roundDownDouble(actionValue2.value),
-                    targetParameter.buildTargetClause(),
+                    targetParameter.BuildTargetClause(),
                     Utils.roundDouble(actionValue3.value));
         }
         else
@@ -30,7 +30,7 @@ public class SealAction : ActionParameter
             return Utils.JavaFormat(Utils.GetString("Remove_s1_mark_stacks_ID_s2_on_s3"),
                     Utils.roundDownDouble(-actionValue4.value),
                     Utils.roundDownDouble(actionValue2.value),
-                    targetParameter.buildTargetClause());
+                    targetParameter.BuildTargetClause());
         }
     }
 }

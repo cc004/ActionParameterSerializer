@@ -33,7 +33,7 @@ public class ModeChangeAction : ActionParameter
     private eCancelTriggerType cancelTriggerType;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         modeChangeType = (ModeChangeType)(actionDetail1);
         additionalAbnormalType = (eAdditionalAbnormalType)(actionValue5.value);
@@ -41,13 +41,13 @@ public class ModeChangeAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
         switch (modeChangeType)
         {
             case ModeChangeType.time:
                 return Utils.JavaFormat(Utils.GetString("Change_attack_pattern_to_d1_for_s2_sec_set_abnormal_state_s3_to_self"),
-                        actionDetail2 % 10, actionValue1.valueString(), additionalAbnormalType.GetPascalDescription());
+                        actionDetail2 % 10, actionValue1.ValueString(), additionalAbnormalType.GetPascalDescription());
             case ModeChangeType.energy:
                 return Utils.JavaFormat(Utils.GetString("Cost_s1_TP_sec_change_attack_pattern_to_d2_until_TP_is_zero"),
                         Utils.roundDownDouble(actionValue1.value), actionDetail2 % 10);
@@ -55,7 +55,7 @@ public class ModeChangeAction : ActionParameter
                 return Utils.JavaFormat(Utils.GetString("Change_attack_pattern_back_to_d_after_effect_over"),
                         actionDetail2 % 10);
             default:
-                return base.localizedDetail(level, property);
+                return base.LocalizedDetail(level, property);
         }
     }
 }

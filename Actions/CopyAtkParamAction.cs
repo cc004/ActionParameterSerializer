@@ -8,26 +8,26 @@ namespace ActionParameterSerializer.Actions
 {
     class CopyAtkParamAction : ActionParameter
     {
-        private enum eAtkType
+        private enum EAtkType
         {
             ATK = 1, Magic_STR = 2
         }
 
         private int targetAction;
-        private eAtkType propType;
+        private EAtkType propType;
 
-        public override void childInit()
+        public override void ChildInit()
         {
-            propType = (eAtkType) actionDetail1;
+            propType = (EAtkType) actionDetail1;
             targetAction = actionDetail2 % 10;
-            base.childInit();
+            base.ChildInit();
         }
 
-        public override string localizedDetail(int level, Property property)
+        public override string LocalizedDetail(int level, Property property)
         {
             return Utils.JavaFormat(Utils.GetString("Use_param_s1_of_s2_for_action_d3"),
                 propType.rawDescription(),
-                targetParameter.buildTargetClause(),
+                targetParameter.BuildTargetClause(),
                 targetAction
             );
         }

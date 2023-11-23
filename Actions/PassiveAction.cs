@@ -11,7 +11,7 @@ public class PassiveAction : ActionParameter
     public PropertyKey propertyKey;
 
     public
-    override void childInit()
+    override void ChildInit()
     {
         switch (actionDetail1)
         {
@@ -32,9 +32,9 @@ public class PassiveAction : ActionParameter
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Raise_s1_s2"), buildExpression(level, property), propertyKey.description());
+        return Utils.JavaFormat(Utils.GetString("Raise_s1_s2"), BuildExpression(level, property), propertyKey.description());
     }
 
     public Property propertyItem(int level)

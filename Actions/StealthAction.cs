@@ -7,14 +7,14 @@ namespace ActionParameterSerializer.Actions;
 public class StealthAction : ActionParameter
 {
     public
-    override void childInit()
+    override void ChildInit()
     {
-        base.childInit();
+        base.ChildInit();
     }
 
     public
-    override string localizedDetail(int level, Property property)
+    override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Stealth_for_s_sec"), actionValue1.valueString());
+        return Utils.JavaFormat(Utils.GetString("Stealth_for_s_sec"), actionValue1.ValueString());
     }
 }

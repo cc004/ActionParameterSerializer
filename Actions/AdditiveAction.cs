@@ -54,7 +54,7 @@ public class AdditiveAction : ActionParameter
                 string s1 = BuildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, true);
                 try
                 {
-                    s1 = Utils.roundIfNeed(2.0 * double.Parse(s1));
+                    s1 = Utils.RoundIfNeed(2.0 * double.Parse(s1));
                 }
                 catch (Exception)
                 {
@@ -122,7 +122,7 @@ public class AdditiveAction : ActionParameter
                 {
                     result = Utils.JavaFormat(Utils.GetString("Modifier_add_s1_s2_of_s3_to_value_d4_of_effect_d5"),
                             BuildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, true),
-                            keyType.description(), targetParameter.BuildTargetClause(), actionDetail2, actionDetail1 % 10);
+                            keyType.Description(), targetParameter.BuildTargetClause(), actionDetail2, actionDetail1 % 10);
                 }
                 else if (actionValue1.value >= 20 && actionValue1.value < 30)
                 {

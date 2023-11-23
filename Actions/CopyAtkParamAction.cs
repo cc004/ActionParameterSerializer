@@ -26,7 +26,7 @@ namespace ActionParameterSerializer.Actions
         public override string LocalizedDetail(int level, Property property)
         {
             return Utils.JavaFormat(Utils.GetString("Use_param_s1_of_s2_for_action_d3"),
-                propType.rawDescription(),
+                propType.RawDescription(),
                 targetParameter.BuildTargetClause(),
                 targetAction
             );

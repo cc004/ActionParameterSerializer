@@ -58,7 +58,7 @@ public class HealFieldAction : ActionParameter
                             (int)actionValue7.value,
                             targetParameter.BuildTargetClause(),
                             BuildExpression(level, property),
-                            percentModifier.description(),
+                            percentModifier.Description(),
                             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
                 else
@@ -67,7 +67,7 @@ public class HealFieldAction : ActionParameter
                             (int)actionValue7.value,
                             targetParameter.BuildTargetClause(),
                             BuildExpression(level, property),
-                            percentModifier.description(),
+                            percentModifier.Description(),
                             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
             default:

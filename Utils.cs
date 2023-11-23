@@ -11,71 +11,34 @@ namespace ActionParameterSerializer
 {
     public class Property
     {
-        public double getItem(PropertyKey? key)
+        public double GetItem(PropertyKey? key)
         {
-            switch (key)
+            return key switch
             {
-                case PropertyKey.atk:
-                    return this.atk;
-                case PropertyKey.def:
-                    return this.def;
-
-                case PropertyKey.dodge:
-                    return this.dodge;
-
-                case PropertyKey.energyRecoveryRate:
-                    return this.energyRecoveryRate;
-
-                case PropertyKey.energyReduceRate:
-                    return this.energyReduceRate;
-
-                case PropertyKey.hp:
-                    return this.hp;
-
-                case PropertyKey.hpRecoveryRate:
-                    return this.hpRecoveryRate;
-
-                case PropertyKey.lifeSteal:
-                    return this.lifeSteal;
-
-                case PropertyKey.magicCritical:
-                    return this.magicCritical;
-
-                case PropertyKey.magicDef:
-                    return this.magicDef;
-
-                case PropertyKey.magicPenetrate:
-                    return this.magicPenetrate;
-
-                case PropertyKey.magicStr:
-                    return this.magicStr;
-
-                case PropertyKey.physicalCritical:
-                    return this.physicalCritical;
-
-                case PropertyKey.physicalPenetrate:
-                    return this.physicalPenetrate;
-
-                case PropertyKey.waveEnergyRecovery:
-                    return this.waveEnergyRecovery;
-
-                case PropertyKey.waveHpRecovery:
-                    return this.waveHpRecovery;
-
-                case PropertyKey.accuracy:
-                    return this.accuracy;
-
-                default:
-                    return 0;
-            }
+                PropertyKey.atk => this.atk,
+                PropertyKey.def => this.def,
+                PropertyKey.dodge => this.dodge,
+                PropertyKey.energyRecoveryRate => this.energyRecoveryRate,
+                PropertyKey.energyReduceRate => this.energyReduceRate,
+                PropertyKey.hp => this.hp,
+                PropertyKey.hpRecoveryRate => this.hpRecoveryRate,
+                PropertyKey.lifeSteal => this.lifeSteal,
+                PropertyKey.magicCritical => this.magicCritical,
+                PropertyKey.magicDef => this.magicDef,
+                PropertyKey.magicPenetrate => this.magicPenetrate,
+                PropertyKey.magicStr => this.magicStr,
+                PropertyKey.physicalCritical => this.physicalCritical,
+                PropertyKey.physicalPenetrate => this.physicalPenetrate,
+                PropertyKey.waveEnergyRecovery => this.waveEnergyRecovery,
+                PropertyKey.waveHpRecovery => this.waveHpRecovery,
+                PropertyKey.accuracy => this.accuracy,
+                _ => 0,
+            };
         }
 
-        public static Property getPropertyWithKeyAndValue(Property property, PropertyKey key, double value)
+        public static Property GetPropertyWithKeyAndValue(Property property, PropertyKey key, double value)
         {
-            if (property == null)
-            {
-                property = new Property();
-            }
+            property ??= new Property();
 
             switch (key)
             {
@@ -158,7 +121,7 @@ namespace ActionParameterSerializer
     public class SkillAction
     {
         public ActionParameter parameter;
-        public int getActionId()
+        public static int GetActionId()
         {
             return 0;
         }
@@ -169,21 +132,23 @@ namespace ActionParameterSerializer
         public const int EXPRESSION_EXPRESSION = 0;
         public const int EXPRESSION_ORIGINAL = 1;
         public const int EXPRESSION_VALUE = 2;
-        public int getExpression()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+        public int GetExpression()
         {
             return expression;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "<Pending>")]
         public static int expression = EXPRESSION_ORIGINAL;
 
-        public static UserSettings get()
+        public static UserSettings Get()
         {
             return new UserSettings();
         }
     }
     public static class EnumEx
     {
-        private static readonly ConcurrentDictionary<Type, Dictionary<long, string>> descDictionary = new ConcurrentDictionary<Type, Dictionary<long, string>>();
+        private static readonly ConcurrentDictionary<Type, Dictionary<long, string>> descDictionary = new();
 
         public static string GetDescription(this Enum input)
         {
@@ -192,7 +157,7 @@ namespace ActionParameterSerializer
 
         public static string GetDescription<TArrtibute>(this Enum input, string attrPropName = "Description") where TArrtibute : Attribute
         {
-            RegisterDescription(input.GetType(), typeof(TArrtibute), out Dictionary<long, string>? dictionary, attrPropName);
+            RegisterDescription(input.GetType(), typeof(TArrtibute), out var dictionary, attrPropName);
             long key = Convert.ToInt64(input);
             if (dictionary != null && dictionary.Count > 0 && dictionary.ContainsKey(key))
             {
@@ -204,7 +169,7 @@ namespace ActionParameterSerializer
         public static IDictionary<TEnum, string> GetDescriptions<TEnum>() where TEnum : struct
         {
             Type typeFromHandle = typeof(TEnum);
-            if (typeFromHandle.IsEnum && descDictionary.TryGetValue(typeFromHandle, out Dictionary<long, string>? value) && value != null)
+            if (typeFromHandle.IsEnum && descDictionary.TryGetValue(typeFromHandle, out var value) && value != null)
             {
                 return value.ToDictionary((KeyValuePair<long, string> k) => Enum.TryParse<TEnum>(k.Key.ToString(), ignoreCase: true, out TEnum result) ? result : result, (KeyValuePair<long, string> v) => v.Value);
             }
@@ -213,7 +178,7 @@ namespace ActionParameterSerializer
         public static string GetPascalDescription(this Enum input)
         {
             string[] words = input.GetDescription<Attribute>().Split('_');
-            return string.Join("", words.Select(w => char.ToUpper(w[0]) + w.Substring(1).ToLower()));
+            return string.Join("", words.Select(w => char.ToUpper(w[0]) + w[1..].ToLower()));
         }
 
         public static void RegisterDescription<TEnum, TArrtibute>(string attrPropName = "Description") where TEnum : struct where TArrtibute : Attribute
@@ -267,33 +232,26 @@ namespace ActionParameterSerializer
     }
     public static class Utils
     {
-        public static ExclusiveAllType exclusiveWithAll(this TargetType type)
+        public static ExclusiveAllType ExclusiveWithAll(this TargetType type)
         {
-            switch (type)
+            return type switch
             {
-                case TargetType.unknown:
-                case TargetType.magic:
-                case TargetType.physics:
-                case TargetType.summon:
-                case TargetType.boss:
-                    return ExclusiveAllType.not;
-                case TargetType.nearWithoutSelf:
-                    return ExclusiveAllType.halfExclusive;
-                default:
-                    return ExclusiveAllType.exclusive;
-            }
+                TargetType.unknown or TargetType.magic or TargetType.physics or TargetType.summon or TargetType.boss => ExclusiveAllType.not,
+                TargetType.nearWithoutSelf => ExclusiveAllType.halfExclusive,
+                _ => ExclusiveAllType.exclusive,
+            };
         }
-        public static AuraAction.AuraActionType toggle(this AuraAction.AuraActionType type)
+        public static AuraAction.AuraActionType Toggle(this AuraAction.AuraActionType type)
         {
-            switch (type)
+            return type switch
             {
-                case AuraAction.AuraActionType.raise: return AuraAction.AuraActionType.reduce;
-                case AuraAction.AuraActionType.reduce: return AuraAction.AuraActionType.raise;
-            }
-            return AuraAction.AuraActionType.raise;
+                AuraAction.AuraActionType.raise => AuraAction.AuraActionType.reduce,
+                AuraAction.AuraActionType.reduce => AuraAction.AuraActionType.raise,
+                _ => AuraAction.AuraActionType.raise,
+            };
         }
 
-        private static Regex re = new Regex(@"%((\d)\$)?[ds]", RegexOptions.Compiled);
+        private static readonly Regex re = new(@"%((\d)\$)?[ds]", RegexOptions.Compiled);
 
         public static string JavaFormat(string format, params object[] args)
         {
@@ -306,26 +264,26 @@ namespace ActionParameterSerializer
             //$"{format}({string.Join(",", args)})");
         }
 
-        public static PluralModifier pluralModifier(this TargetCount count)
+        public static PluralModifier PluralModifier(this TargetCount count)
         {
             if (count == TargetCount.one)
             {
-                return PluralModifier.one;
+                return Actions.PluralModifier.one;
             }
             else
             {
-                return PluralModifier.many;
+                return Actions.PluralModifier.many;
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "<Pending>")]
         public static string path = "string.json";
 
         private static Dictionary<string, string> cache;
 
         public static string GetString(string name)
         {
-            if (cache == null)
-                cache = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+            cache ??= JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
 
             if (cache.TryGetValue(name, out var val)) return val;
             if (cache.TryGetValue(name.ToUpper(), out val)) return val;
@@ -335,29 +293,31 @@ namespace ActionParameterSerializer
 #if DEBUG
             throw new NotImplementedException();
 #else
+#pragma warning disable CS0162 // Unreachable code detected
             return "不明效果";
+#pragma warning restore CS0162 // Unreachable code detected
 #endif
         }
 
-        private static readonly Regex re2 = new Regex($"[A-Z]", RegexOptions.Compiled);
+        private static readonly Regex re2 = new($"[A-Z]", RegexOptions.Compiled);
 
-        public static string description(this Enum t)
+        public static string Description(this Enum t)
         {
             return GetString(re2.Replace(t.GetDescription(), match => "_" + match.Groups[0].Value.ToLower()));
         }
-        public static string rawDescription(this Enum t)
+        public static string RawDescription(this Enum t)
         {
             return GetString(t.GetDescription());
         }
 
-        public static string description(this AuraAction.AuraType val)
+        public static string Description(this AuraAction.AuraType val)
         {
             switch (val)
             {
                 case AuraAction.AuraType.moveSpeed: return Utils.GetString("Move_Speed");
                 case AuraAction.AuraType.physicalCriticalDamage: return Utils.GetString("Physical_Critical_Damage");
                 case AuraAction.AuraType.magicalCriticalDamage: return Utils.GetString("Magical_Critical_Damage");
-                case AuraAction.AuraType.accuracy: return PropertyKey.accuracy.description();
+                case AuraAction.AuraType.accuracy: return PropertyKey.accuracy.Description();
                 case AuraAction.AuraType.receivedCriticalDamage: return Utils.GetString("Received_Critical_Damage");
                 case AuraAction.AuraType.receivedDamage: return Utils.GetString("received_damage");
                 case AuraAction.AuraType.receivedPhysicalDamage: return Utils.GetString("received_physical_damage");
@@ -365,101 +325,90 @@ namespace ActionParameterSerializer
                 case AuraAction.AuraType.maxHP: return Utils.GetString("max_HP");
                 default:
                     if (Enum.TryParse<PropertyKey>(val.ToString(), out var key))
-                        return key.description();
-                    return ((Enum) val).description();
+                        return key.Description();
+                    return ((Enum) val).Description();
             }
         }
 
-        public static string description(this PercentModifier val)
+        public static string Description(this PercentModifier val)
         {
-            switch (val)
+            return val switch
             {
-                case PercentModifier.percent: return "%";
-            }
-
-            return "";
+                PercentModifier.percent => "%%%",
+                _ => "",
+            };
         }
 
-        public static string description(this AuraAction.AuraActionType val)
+        public static string Description(this AuraAction.AuraActionType val)
         {
-            switch (val)
+            return val switch
             {
-                case AuraAction.AuraActionType.raise: return GetString("Raise");
-                case AuraAction.AuraActionType.reduce: return GetString("Reduce");
-            }
-            return GetString("Raise");
+                AuraAction.AuraActionType.raise => GetString("Raise"),
+                AuraAction.AuraActionType.reduce => GetString("Reduce"),
+                _ => GetString("Raise"),
+            };
         }
 
-        public static string description(this ActionParameter.EActionValue val)
+        public static string Description(this ActionParameter.EActionValue val)
         {
             return GetString(val.ToString().ToLower());
         }
 
-        public static string description(this PropertyKey? key)
+        public static string Description(this PropertyKey? key)
         {
-            return key.Value.description();
+            return key.Value.Description();
         }
 
-        public static string description(this PropertyKey key)
+        public static string Description(this PropertyKey key)
         {
-            switch (key)
+            return key switch
             {
-                case PropertyKey.atk: return Utils.GetString("ATK");
-                case PropertyKey.def: return Utils.GetString("DEF");
-                case PropertyKey.dodge: return Utils.GetString("Dodge");
-                case PropertyKey.energyRecoveryRate: return Utils.GetString("Energy_Recovery_Rate");
-                case PropertyKey.energyReduceRate: return Utils.GetString("Energy_Reduce_Rate");
-                case PropertyKey.hp: return Utils.GetString("HP");
-                case PropertyKey.hpRecoveryRate: return Utils.GetString("HP_Recovery_Rate");
-                case PropertyKey.lifeSteal: return Utils.GetString("Life_Steal");
-                case PropertyKey.magicCritical: return Utils.GetString("Magic_Critical");
-                case PropertyKey.magicDef: return Utils.GetString("Magic_DEF");
-                case PropertyKey.magicPenetrate: return Utils.GetString("Magic_Penetrate");
-                case PropertyKey.magicStr: return Utils.GetString("Magic_STR");
-                case PropertyKey.physicalCritical: return Utils.GetString("Physical_Critical");
-                case PropertyKey.physicalPenetrate: return Utils.GetString("Physical_Penetrate");
-                case PropertyKey.waveEnergyRecovery: return Utils.GetString("Wave_Energy_Recovery");
-                case PropertyKey.waveHpRecovery: return Utils.GetString("Wave_HP_Recovery");
-                case PropertyKey.accuracy: return Utils.GetString("Accuracy");
-                default: return Utils.GetString("Unknown");
-            }
+                PropertyKey.atk => Utils.GetString("ATK"),
+                PropertyKey.def => Utils.GetString("DEF"),
+                PropertyKey.dodge => Utils.GetString("Dodge"),
+                PropertyKey.energyRecoveryRate => Utils.GetString("Energy_Recovery_Rate"),
+                PropertyKey.energyReduceRate => Utils.GetString("Energy_Reduce_Rate"),
+                PropertyKey.hp => Utils.GetString("HP"),
+                PropertyKey.hpRecoveryRate => Utils.GetString("HP_Recovery_Rate"),
+                PropertyKey.lifeSteal => Utils.GetString("Life_Steal"),
+                PropertyKey.magicCritical => Utils.GetString("Magic_Critical"),
+                PropertyKey.magicDef => Utils.GetString("Magic_DEF"),
+                PropertyKey.magicPenetrate => Utils.GetString("Magic_Penetrate"),
+                PropertyKey.magicStr => Utils.GetString("Magic_STR"),
+                PropertyKey.physicalCritical => Utils.GetString("Physical_Critical"),
+                PropertyKey.physicalPenetrate => Utils.GetString("Physical_Penetrate"),
+                PropertyKey.waveEnergyRecovery => Utils.GetString("Wave_Energy_Recovery"),
+                PropertyKey.waveHpRecovery => Utils.GetString("Wave_HP_Recovery"),
+                PropertyKey.accuracy => Utils.GetString("Accuracy"),
+                _ => Utils.GetString("Unknown"),
+            };
         }
 
-        public static bool ignoresOne(this TargetType type)
+        public static bool IgnoresOne(this TargetType type)
         {
-            switch (type)
+            return type switch
             {
-                case TargetType.unknown:
-                case TargetType.random:
-                case TargetType.randomOnce:
-                case TargetType.absolute:
-                case TargetType.summon:
-                case TargetType.selfSummonRandom:
-                case TargetType.allSummonRandom:
-                case TargetType.magic:
-                case TargetType.physics:
-                    return false;
-                default:
-                    return true;
-            }
+                TargetType.unknown or TargetType.random or TargetType.randomOnce or TargetType.absolute or TargetType.summon or TargetType.selfSummonRandom or TargetType.allSummonRandom or TargetType.magic or TargetType.physics => false,
+                _ => true,
+            };
         }
-        public static string roundDownDouble(double value)
+        public static string RoundDownDouble(double value)
         {
             return (Math.Floor(value)).ToString();
         }
-        public static string roundUpDouble(double value)
+        public static string RoundUpDouble(double value)
         {
             return (Math.Ceiling(value)).ToString();
         }
-        public static string roundDouble(double value)
+        public static string RoundDouble(double value)
         {
             return (Math.Round(value)).ToString();
         }
-        public static string roundIfNeed(double value)
+        public static string RoundIfNeed(double value)
         {
             if (value % 1 == 0)
             {
-                return roundDouble(value);
+                return RoundDouble(value);
             }
             else
             {
@@ -470,92 +419,46 @@ namespace ActionParameterSerializer
         public static StringBuilder RemoveRange(this StringBuilder sb, int start, int end) =>
             sb.Remove(start, end - start);
 
-        public static string description(this TargetType type)
+        public static string Description(this TargetType type)
         {
-            switch (type)
+            return type switch
             {
-                case TargetType.unknown:
-                    return Utils.JavaFormat(Utils.GetString("unknown"));
-                case TargetType.random:
-                case TargetType.randomOnce:
-                    return Utils.JavaFormat(Utils.GetString("random"));
-                case TargetType.zero:
-                case TargetType.near:
-                case TargetType.none:
-                    return Utils.JavaFormat(Utils.GetString("the_nearest"));
-                case TargetType.far:
-                    return Utils.JavaFormat(Utils.GetString("the_farthest"));
-                case TargetType.hpAscending:
-                case TargetType.hpAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_HP_ratio"));
-                case TargetType.hpAscendingOrNearForward:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_HP"));
-                case TargetType.hpDescendingOrNearForward:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_HP"));
-                case TargetType.hpDescending:
-                case TargetType.hpDescendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_HP_ratio"));
-                case TargetType.self:
-                    return Utils.JavaFormat(Utils.GetString("self"));
-                case TargetType.forward:
-                    return Utils.JavaFormat(Utils.GetString("the_most_backward"));
-                case TargetType.backward:
-                    return Utils.JavaFormat(Utils.GetString("the_most_forward"));
-                case TargetType.absolute:
-                    return Utils.JavaFormat(Utils.GetString("targets_within_the_scope"));
-                case TargetType.tpDescending:
-                case TargetType.tpDescendingOrNear:
-                case TargetType.tpDescendingOrMaxForward:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_TP"));
-                case TargetType.tpAscending:
-                case TargetType.tpReducing:
-                case TargetType.tpAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_TP"));
-                case TargetType.atkDescending:
-                case TargetType.atkDescendingOrNear:
-                case TargetType.atkDecForwardWithoutOwner:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_ATK"));
-                case TargetType.atkAscending:
-                case TargetType.atkAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_ATK"));
-                case TargetType.magicSTRDescending:
-                case TargetType.magicSTRDescendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_Magic_STR"));
-                case TargetType.magicSTRAscending:
-                case TargetType.magicSTRAscendingOrNear:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_Magic_STR"));
-                case TargetType.summon:
-                    return Utils.JavaFormat(Utils.GetString("minion"));
-                case TargetType.physics:
-                    return Utils.JavaFormat(Utils.GetString("physics"));
-                case TargetType.magic:
-                    return Utils.JavaFormat(Utils.GetString("magic"));
-                case TargetType.allSummonRandom:
-                    return Utils.JavaFormat(Utils.GetString("random_minion"));
-                case TargetType.selfSummonRandom:
-                    return Utils.JavaFormat(Utils.GetString("random_self_minion"));
-                case TargetType.boss:
-                    return Utils.JavaFormat(Utils.GetString("boss"));
-                case TargetType.shadow:
-                    return Utils.JavaFormat(Utils.GetString("shadow"));
-                case TargetType.nearWithoutSelf:
-                    return Utils.JavaFormat(Utils.GetString("nearest_without_self"));
-                case TargetType.bothAtkDescending:
-                    return Utils.JavaFormat(Utils.GetString("the_highest_ATK_or_Magic_STR"));
-                case TargetType.bothAtkAscending:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_ATK_or_Magic_STR"));
-                case TargetType.energyAscBackWithoutOwner:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self"));
-                case TargetType.atkDefAscForward:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_DEF"));
-                case TargetType.magicDefAscForward:
-                    return Utils.JavaFormat(Utils.GetString("the_lowest_Magic_DEF"));
-                default:
-                    return Utils.JavaFormat(((Enum)type).description());
-            }
+                TargetType.unknown => Utils.JavaFormat(Utils.GetString("unknown")),
+                TargetType.random or TargetType.randomOnce => Utils.JavaFormat(Utils.GetString("random")),
+                TargetType.zero or TargetType.near or TargetType.none => Utils.JavaFormat(Utils.GetString("the_nearest")),
+                TargetType.far => Utils.JavaFormat(Utils.GetString("the_farthest")),
+                TargetType.hpAscending or TargetType.hpAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_lowest_HP_ratio")),
+                TargetType.hpAscendingOrNearForward => Utils.JavaFormat(Utils.GetString("the_lowest_HP")),
+                TargetType.hpDescendingOrNearForward => Utils.JavaFormat(Utils.GetString("the_highest_HP")),
+                TargetType.hpDescending or TargetType.hpDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_highest_HP_ratio")),
+                TargetType.self => Utils.JavaFormat(Utils.GetString("self")),
+                TargetType.forward => Utils.JavaFormat(Utils.GetString("the_most_backward")),
+                TargetType.backward => Utils.JavaFormat(Utils.GetString("the_most_forward")),
+                TargetType.absolute => Utils.JavaFormat(Utils.GetString("targets_within_the_scope")),
+                TargetType.tpDescending or TargetType.tpDescendingOrNear or TargetType.tpDescendingOrMaxForward => Utils.JavaFormat(Utils.GetString("the_highest_TP")),
+                TargetType.tpAscending or TargetType.tpReducing or TargetType.tpAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_lowest_TP")),
+                TargetType.atkDescending or TargetType.atkDescendingOrNear or TargetType.atkDecForwardWithoutOwner => Utils.JavaFormat(Utils.GetString("the_highest_ATK")),
+                TargetType.atkAscending or TargetType.atkAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_lowest_ATK")),
+                TargetType.magicSTRDescending or TargetType.magicSTRDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_highest_Magic_STR")),
+                TargetType.magicSTRAscending or TargetType.magicSTRAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_lowest_Magic_STR")),
+                TargetType.summon => Utils.JavaFormat(Utils.GetString("minion")),
+                TargetType.physics => Utils.JavaFormat(Utils.GetString("physics")),
+                TargetType.magic => Utils.JavaFormat(Utils.GetString("magic")),
+                TargetType.allSummonRandom => Utils.JavaFormat(Utils.GetString("random_minion")),
+                TargetType.selfSummonRandom => Utils.JavaFormat(Utils.GetString("random_self_minion")),
+                TargetType.boss => Utils.JavaFormat(Utils.GetString("boss")),
+                TargetType.shadow => Utils.JavaFormat(Utils.GetString("shadow")),
+                TargetType.nearWithoutSelf => Utils.JavaFormat(Utils.GetString("nearest_without_self")),
+                TargetType.bothAtkDescending => Utils.JavaFormat(Utils.GetString("the_highest_ATK_or_Magic_STR")),
+                TargetType.bothAtkAscending => Utils.JavaFormat(Utils.GetString("the_lowest_ATK_or_Magic_STR")),
+                TargetType.energyAscBackWithoutOwner => Utils.JavaFormat(Utils.GetString("the_lowest_TP_except_self")),
+                TargetType.atkDefAscForward => Utils.JavaFormat(Utils.GetString("the_lowest_DEF")),
+                TargetType.magicDefAscForward => Utils.JavaFormat(Utils.GetString("the_lowest_Magic_DEF")),
+                _ => Utils.JavaFormat(((Enum)type).Description()),
+            };
         }
         
-        public static string description(this TargetType type, TargetNumber targetNumber, string localizedNumber)
+        public static string Description(this TargetType type, TargetNumber targetNumber, string localizedNumber)
         {
 
             if (targetNumber == TargetNumber.second
@@ -564,72 +467,40 @@ namespace ActionParameterSerializer
                 || targetNumber == TargetNumber.fifth)
             {
 
-                string localizedModifier = localizedNumber == null ? targetNumber.description() : localizedNumber;
-                switch (type)
+                string localizedModifier = localizedNumber ?? targetNumber.Description();
+                return type switch
                 {
-                    case TargetType.unknown:
-                        return Utils.JavaFormat(Utils.GetString("the_s_unknown_type"), localizedModifier);
-                    case TargetType.zero:
-                    case TargetType.near:
-                    case TargetType.none:
-                        return Utils.JavaFormat(Utils.GetString("the_s_nearest"), localizedModifier);
-                    case TargetType.far:
-                        return Utils.JavaFormat(Utils.GetString("the_s_farthest"), localizedModifier);
-                    case TargetType.hpAscending:
-                    case TargetType.hpAscendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_HP_ratio"), localizedModifier);
-                    case TargetType.hpDescending:
-                    case TargetType.hpDescendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_HP_ratio"), localizedModifier);
-                    case TargetType.hpAscendingOrNearForward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_HP"), localizedModifier);
-                    case TargetType.hpDescendingOrNearForward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_HP"), localizedModifier);
-                    case TargetType.forward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_most_backward"), localizedModifier);
-                    case TargetType.backward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_most_forward"), localizedModifier);
-                    case TargetType.tpDescending:
-                    case TargetType.tpDescendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_TP"), localizedModifier);
-                    case TargetType.tpAscending:
-                    case TargetType.tpReducing:
-                    case TargetType.tpAscendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_TP"), localizedModifier);
-                    case TargetType.atkDescending:
-                    case TargetType.atkDescendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_ATK"), localizedModifier);
-                    case TargetType.atkAscending:
-                    case TargetType.atkAscendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK"), localizedModifier);
-                    case TargetType.magicSTRDescending:
-                    case TargetType.magicSTRDescendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_Magic_STR"), localizedModifier);
-                    case TargetType.magicSTRAscending:
-                    case TargetType.magicSTRAscendingOrNear:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_Magic_STR"), localizedModifier);
-                    case TargetType.nearWithoutSelf:
-                        return Utils.JavaFormat(Utils.GetString("the_s_nearest_without_self"));
-                    case TargetType.bothAtkDescending:
-                        return Utils.JavaFormat(Utils.GetString("the_s_highest_ATK_or_Magic_STR"), localizedModifier);
-                    case TargetType.bothAtkAscending:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK_or_Magic_STR"), localizedModifier);
-                    case TargetType.energyAscBackWithoutOwner:
-                        return Utils.JavaFormat(Utils.GetString("the_s_th_lowest_TP_except_self"), localizedModifier);
-                    case TargetType.atkDefAscForward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_DEF"), localizedModifier);
-                    case TargetType.magicDefAscForward:
-                        return Utils.JavaFormat(Utils.GetString("the_s_lowest_Magic_DEF"), localizedModifier);
-                    default:
-                        return Utils.JavaFormat("s_" + ((Enum)type).description(), localizedModifier);
-                }
+                    TargetType.unknown => Utils.JavaFormat(Utils.GetString("the_s_unknown_type"), localizedModifier),
+                    TargetType.zero or TargetType.near or TargetType.none => Utils.JavaFormat(Utils.GetString("the_s_nearest"), localizedModifier),
+                    TargetType.far => Utils.JavaFormat(Utils.GetString("the_s_farthest"), localizedModifier),
+                    TargetType.hpAscending or TargetType.hpAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_lowest_HP_ratio"), localizedModifier),
+                    TargetType.hpDescending or TargetType.hpDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_highest_HP_ratio"), localizedModifier),
+                    TargetType.hpAscendingOrNearForward => Utils.JavaFormat(Utils.GetString("the_s_lowest_HP"), localizedModifier),
+                    TargetType.hpDescendingOrNearForward => Utils.JavaFormat(Utils.GetString("the_s_highest_HP"), localizedModifier),
+                    TargetType.forward => Utils.JavaFormat(Utils.GetString("the_s_most_backward"), localizedModifier),
+                    TargetType.backward => Utils.JavaFormat(Utils.GetString("the_s_most_forward"), localizedModifier),
+                    TargetType.tpDescending or TargetType.tpDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_highest_TP"), localizedModifier),
+                    TargetType.tpAscending or TargetType.tpReducing or TargetType.tpAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_lowest_TP"), localizedModifier),
+                    TargetType.atkDescending or TargetType.atkDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_highest_ATK"), localizedModifier),
+                    TargetType.atkAscending or TargetType.atkAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK"), localizedModifier),
+                    TargetType.magicSTRDescending or TargetType.magicSTRDescendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_highest_Magic_STR"), localizedModifier),
+                    TargetType.magicSTRAscending or TargetType.magicSTRAscendingOrNear => Utils.JavaFormat(Utils.GetString("the_s_lowest_Magic_STR"), localizedModifier),
+                    TargetType.nearWithoutSelf => Utils.JavaFormat(Utils.GetString("the_s_nearest_without_self")),
+                    TargetType.bothAtkDescending => Utils.JavaFormat(Utils.GetString("the_s_highest_ATK_or_Magic_STR"), localizedModifier),
+                    TargetType.bothAtkAscending => Utils.JavaFormat(Utils.GetString("the_s_lowest_ATK_or_Magic_STR"), localizedModifier),
+                    TargetType.energyAscBackWithoutOwner => Utils.JavaFormat(Utils.GetString("the_s_th_lowest_TP_except_self"), localizedModifier),
+                    TargetType.atkDefAscForward => Utils.JavaFormat(Utils.GetString("the_s_lowest_DEF"), localizedModifier),
+                    TargetType.magicDefAscForward => Utils.JavaFormat(Utils.GetString("the_s_lowest_Magic_DEF"), localizedModifier),
+                    _ => Utils.JavaFormat("s_" + ((Enum)type).Description(), localizedModifier),
+                };
             }
             else
             {
-                return type.description();
+                return type.Description();
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         public static string Round(double bigDecimal, RoundingMode? roundingMode)
         {
             return bigDecimal.ToString();

@@ -27,10 +27,10 @@ internal class PassiveDamageUpAction : ActionParameter
             case eCountType.Debuff:
                 return Utils.JavaFormat(Utils.GetString("Make_s1_damage_changes_into_s234_times_caps_to_s5_times_dur_s6_sec"),
                         targetParameter.BuildTargetClause(),
-                        effectType.description(),
-                        Utils.roundIfNeed(debuffDamageUpValue),
-                        countType.description(),
-                        Utils.roundIfNeed(debuffDamageUpLimitValue),
+                        effectType.Description(),
+                        Utils.RoundIfNeed(debuffDamageUpValue),
+                        countType.Description(),
+                        Utils.RoundIfNeed(debuffDamageUpLimitValue),
                         BuildExpression(level, property)
                 );
             default:

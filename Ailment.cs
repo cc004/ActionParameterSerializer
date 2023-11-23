@@ -6,24 +6,24 @@
         public class AilmentDetail
         {
             public object detail;
-            public void setDetail(object obj)
+            public void SetDetail(object obj)
             {
                 detail = obj;
             }
 
-            public string description()
+            public string Description()
             {
                 if (detail is DotDetail dotDetail)
                 {
-                    return dotDetail.description();
+                    return dotDetail.Description();
                 }
                 else if (detail is ActionDetail actionDetail)
                 {
-                    return actionDetail.description();
+                    return actionDetail.Description();
                 }
                 else if (detail is CharmDetail charmDetail)
                 {
-                    return charmDetail.description();
+                    return charmDetail.Description();
                 }
                 else
                 {
@@ -100,14 +100,14 @@
             switch (ailmentType)
             {
                 case AilmentType.action:
-                    ailmentDetail.setDetail((ActionDetail)(detail));
+                    ailmentDetail.SetDetail((ActionDetail)(detail));
                     break;
                 case AilmentType.dot:
                 case AilmentType.damageByBehaviour:
-                    ailmentDetail.setDetail((DotDetail)(detail));
+                    ailmentDetail.SetDetail((DotDetail)(detail));
                     break;
                 case AilmentType.charm:
-                    ailmentDetail.setDetail((CharmDetail)(detail));
+                    ailmentDetail.SetDetail((CharmDetail)(detail));
                     break;
                 default:
                     ailmentDetail = null;
@@ -115,15 +115,15 @@
             }
         }
 
-        public string description()
+        public string Description()
         {
             if (ailmentDetail != null)
             {
-                return ailmentDetail.description();
+                return ailmentDetail.Description();
             }
             else
             {
-                return ailmentType.description();
+                return ailmentType.Description();
             }
         }
     }

@@ -50,24 +50,24 @@ public class AttackSealAction : ActionParameter
         {
             return Utils.JavaFormat(Utils.GetString("Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec"),
                     targetParameter.BuildTargetClause(),
-                    Utils.roundDownDouble(actionValue1.value),
-                    Utils.roundDownDouble(actionValue2.value),
+                    Utils.RoundDownDouble(actionValue1.value),
+                    Utils.RoundDownDouble(actionValue2.value),
                     BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
         }
         else if (condition == Condition.damage && target == Target.owner)
         {
             return Utils.JavaFormat(Utils.GetString("Make_s1_when_deal_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec"),
                     targetParameter.BuildTargetClause(),
-                    Utils.roundDownDouble(actionValue1.value),
-                    Utils.roundDownDouble(actionValue2.value),
+                    Utils.RoundDownDouble(actionValue1.value),
+                    Utils.RoundDownDouble(actionValue2.value),
                     BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
         }
         else if (condition == Condition.criticalHit && target == Target.owner)
         {
             return Utils.JavaFormat(Utils.GetString("Make_s1_when_deal_critical_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec"),
                     targetParameter.BuildTargetClause(),
-                    Utils.roundDownDouble(actionValue1.value),
-                    Utils.roundDownDouble(actionValue2.value),
+                    Utils.RoundDownDouble(actionValue1.value),
+                    Utils.RoundDownDouble(actionValue2.value),
                     BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
         }
         else

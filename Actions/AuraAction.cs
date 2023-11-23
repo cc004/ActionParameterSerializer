@@ -23,7 +23,7 @@ public class AuraAction : ActionParameter
         dodge = 5,
         physicalCritical = 6,
         magicalCritical = 7,
-        energyRecoverRate = 8,
+        energyRecoveryRate = 8,
         lifeSteal = 9,
         moveSpeed = 10,
         physicalCriticalDamage = 11,
@@ -86,7 +86,7 @@ public class AuraAction : ActionParameter
             case AuraType.receivedMagicalDamage:
             case AuraType.receivedPhysicalDamage:
             case AuraType.receivedDamage:
-                auraActionType = auraActionType.toggle();
+                auraActionType = auraActionType.Toggle();
                 percentModifier = PercentModifier.percent;
                 break;
             case AuraType.physicalDamageUpPercent:
@@ -100,7 +100,7 @@ public class AuraAction : ActionParameter
     override string LocalizedDetail(int level, Property property)
     {
         string r = BuildExpression(level, RoundingMode.UP, property);
-        if (percentModifier == PercentModifier.percent && UserSettings.get().getExpression() != UserSettings.EXPRESSION_VALUE)
+        if (percentModifier == PercentModifier.percent && UserSettings.Get().GetExpression() != UserSettings.EXPRESSION_VALUE)
         {
             r = Utils.JavaFormat("(%s)", r);
         }
@@ -108,15 +108,15 @@ public class AuraAction : ActionParameter
         {
             case BreakType.Break:
                 return Utils.JavaFormat(Utils.GetString("s1_s2_s3_s4_s5_during_break"),
-                        auraActionType.description(), targetParameter.BuildTargetClause(), r, percentModifier.description(), auraType.description());
+                        auraActionType.Description(), targetParameter.BuildTargetClause(), r, percentModifier.Description(), auraType.Description());
             default:
                 {
                     return Utils.JavaFormat(Utils.GetString("s1_s2_s3_s4_s5_for_s6_sec"),
-                            auraActionType.description(),
+                            auraActionType.Description(),
                             targetParameter.BuildTargetClause(),
                             r,
-                            percentModifier.description(),
-                            auraType.description(),
+                            percentModifier.Description(),
+                            auraType.Description(),
                             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
                             isConstant ? Utils.JavaFormat(Utils.GetString("this_buff_is_constant")) : "");
                 }

@@ -32,23 +32,19 @@ public class RatioDamageAction : ActionParameter
     override string LocalizedDetail(int level, Property property)
     {
         string r = BuildExpression(level, RoundingMode.UNNECESSARY, property);
-        if (UserSettings.get().getExpression() != UserSettings.EXPRESSION_VALUE)
+        if (UserSettings.Get().GetExpression() != UserSettings.EXPRESSION_VALUE)
         {
             r = Utils.JavaFormat("(%s)", r);
         }
-        switch (hptype)
+        return hptype switch
         {
-            case HPtype.max:
-                return Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_target_max_HP_to_s2"),
-                        r, targetParameter.BuildTargetClause());
-            case HPtype.current:
-                return Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_target_current_HP_to_s2"),
-                        r, targetParameter.BuildTargetClause());
-            case HPtype.originalMax:
-                return Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_targets_original_max_HP_to_s2"),
-                        r, targetParameter.BuildTargetClause());
-            default:
-                return base.LocalizedDetail(level, property);
-        }
+            HPtype.max => Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_target_max_HP_to_s2"),
+                                    r, targetParameter.BuildTargetClause()),
+            HPtype.current => Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_target_current_HP_to_s2"),
+                                    r, targetParameter.BuildTargetClause()),
+            HPtype.originalMax => Utils.JavaFormat(Utils.GetString("Deal_damage_equal_to_s1_of_targets_original_max_HP_to_s2"),
+                                    r, targetParameter.BuildTargetClause()),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

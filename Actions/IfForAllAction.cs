@@ -23,7 +23,7 @@ public class IfForAllAction : ActionParameter
                 IfType? ifType = (IfType)actionDetail1;
                 if (ifType != null)
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_s3"),
-                        actionDetail2 % 100, targetParameter.BuildTargetClause(true), ifType.description());
+                        actionDetail2 % 100, targetParameter.BuildTargetClause(true), ifType.Description());
             }
             else if (actionDetail1 >= 0 && actionDetail1 < 100)
             {
@@ -33,7 +33,7 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 >= 500 && actionDetail1 <= 512)
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_has_s3"),
-                        actionDetail2 % 10, targetParameter.BuildTargetClause(), ifType.description());
+                        actionDetail2 % 10, targetParameter.BuildTargetClause(), ifType.Description());
             }
             else if (actionDetail1 == 599)
             {
@@ -104,7 +104,7 @@ public class IfForAllAction : ActionParameter
             {
                 var env = (EnvironmentAction.EnvironmentType) (actionDetail1 - 3000);
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_enabled"),
-                    actionDetail2 % 10, env.description());
+                    actionDetail2 % 10, env.Description());
             }
             else if (actionDetail1 >= 1600)
             {
@@ -131,7 +131,7 @@ public class IfForAllAction : ActionParameter
                 IfType? ifType = (IfType)actionDetail1;
                 if (ifType != null)
                     falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_s3"),
-                            actionDetail3 % 100, targetParameter.BuildTargetClause(true), ifType.description());
+                            actionDetail3 % 100, targetParameter.BuildTargetClause(true), ifType.Description());
             }
             else if (actionDetail1 >= 0 && actionDetail1 < 100)
             {
@@ -141,7 +141,7 @@ public class IfForAllAction : ActionParameter
             else if (actionDetail1 >= 500 && actionDetail1 <= 512)
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_does_not_have_s3"),
-                        actionDetail3 % 10, targetParameter.BuildTargetClause(), ifType.description());
+                        actionDetail3 % 10, targetParameter.BuildTargetClause(), ifType.Description());
             }
             else if (actionDetail1 == 599)
             {
@@ -212,7 +212,7 @@ public class IfForAllAction : ActionParameter
             {
                 var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_not_enabled"),
-                    actionDetail2 % 10, env.description());
+                    actionDetail2 % 10, env.Description());
             }
             else if (actionDetail1 >= 1600)
             {

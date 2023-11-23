@@ -50,10 +50,10 @@ public class DamageAction : ActionParameter
         switch (criticalModifier)
         {
             case CriticalModifier.normal:
-                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3"), BuildExpression(level, property), damageClass.description(), targetParameter.BuildTargetClause()));
+                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3"), BuildExpression(level, property), damageClass.Description(), targetParameter.BuildTargetClause()));
                 break;
             case CriticalModifier.critical:
-                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical"), BuildExpression(level, property), damageClass.description(), targetParameter.BuildTargetClause(), Utils.roundIfNeed(actionValue5.value)));
+                str.Append(Utils.JavaFormat(Utils.GetString("Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical"), BuildExpression(level, property), damageClass.Description(), targetParameter.BuildTargetClause(), Utils.RoundIfNeed(actionValue5.value)));
                 break;
         }
         if (actionValue6.value != 0)
@@ -66,7 +66,7 @@ public class DamageAction : ActionParameter
         }
         if (actionValue7.value != 0)
         {
-            str.Append(Utils.JavaFormat(Utils.GetString("This_damage_ignores_s1_s2_defense"), actionValue7.value, damageClass.description()));
+            str.Append(Utils.JavaFormat(Utils.GetString("This_damage_ignores_s1_s2_defense"), actionValue7.value, damageClass.Description()));
         }
         return str.ToString();
     }

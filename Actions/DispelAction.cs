@@ -35,7 +35,7 @@ public class DispelAction : ActionParameter
     override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Clear_all_s1_on_s2_with_chance_s3"),
-                dispelType.description(),
+                dispelType.Description(),
                 targetParameter.BuildTargetClause(),
                 BuildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property));
     }

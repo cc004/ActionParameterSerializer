@@ -46,7 +46,7 @@ public class AilmentAction : ActionParameter
                     //                        break;
                     case Ailment.ActionDetail.haste:
                     case Ailment.ActionDetail.slow:
-                        if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL)
+                        if (UserSettings.Get().GetExpression() == UserSettings.EXPRESSION_ORIGINAL)
                         {
                             str = Utils.JavaFormat(Utils.GetString("Multiple_attack_speed_of_s1_with_s2_for_s3_sec"),
                                     targetParameter.BuildTargetClause(),
@@ -58,7 +58,7 @@ public class AilmentAction : ActionParameter
                         {
                             str = Utils.JavaFormat(Utils.GetString("Multiple_attack_speed_of_s1_with_s2_for_s3_sec"),
                                     targetParameter.BuildTargetClause(),
-                                    Utils.roundIfNeed(double.Parse(BuildExpression(level, actionValues, RoundingMode.UNNECESSARY, property)) * 100),
+                                    Utils.RoundIfNeed(double.Parse(BuildExpression(level, actionValues, RoundingMode.UNNECESSARY, property)) * 100),
                                     BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
                             );
                         }
@@ -77,7 +77,7 @@ public class AilmentAction : ActionParameter
                         break;
                     default:
                         str = Utils.JavaFormat(Utils.GetString("s1_s2_for_s3_sec"),
-                                ailment.description(), targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                                ailment.Description(), targetParameter.BuildTargetClause(), BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                         break;
                 }
                 if (actionDetail2 == 1)
@@ -93,7 +93,7 @@ public class AilmentAction : ActionParameter
                     Ailment.DotDetail.violentPoison => Utils.JavaFormat(Utils.GetString("Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec"),
                                                     targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
                     _ => Utils.JavaFormat(Utils.GetString("s1_s2_and_deal_s3_damage_per_second_for_s4_sec"),
-                                                    ailment.description(), targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
+                                                    ailment.Description(), targetParameter.BuildTargetClause(), BuildExpression(level, property), BuildExpression(level, durationValues, RoundingMode.HALF_UP, property)),
                 };
                 if (actionValue5.value > 0)
                 {

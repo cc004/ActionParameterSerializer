@@ -55,7 +55,7 @@ public class AttackFieldAction : ActionParameter
                     return Utils.JavaFormat(Utils.GetString("Summon_a_field_of_radius_d1_to_deal_s2_s3_damage_per_second_for_s4_sec_to_s5"),
                             (int)actionValue7.value,
                             BuildExpression(level, property),
-                            damageClass.description(),
+                            damageClass.Description(),
                             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
                             targetParameter.BuildTargetClause());
                 }
@@ -65,7 +65,7 @@ public class AttackFieldAction : ActionParameter
                             (int)actionValue7.value,
                             targetParameter.BuildTargetClause(),
                             BuildExpression(level, property),
-                            damageClass.description(),
+                            damageClass.Description(),
                             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
                 }
             default:

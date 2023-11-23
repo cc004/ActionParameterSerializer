@@ -26,14 +26,12 @@ public class SpyAction : ActionParameter
     public
     override string LocalizedDetail(int level, Property property)
     {
-        switch (cancelType)
+        return cancelType switch
         {
-            case CancelType.Damaged:
-                return Utils.JavaFormat(Utils.GetString("Make_s1_invisible_for_s2_cancels_on_taking_damage"),
-                        targetParameter.BuildTargetClause(),
-                        BuildExpression(level, actionValues, null, property));
-            default:
-                return base.LocalizedDetail(level, property);
-        }
+            CancelType.Damaged => Utils.JavaFormat(Utils.GetString("Make_s1_invisible_for_s2_cancels_on_taking_damage"),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, actionValues, null, property)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

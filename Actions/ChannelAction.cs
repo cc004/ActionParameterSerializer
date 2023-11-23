@@ -31,11 +31,11 @@ public class ChannelAction : AuraAction
             ReleaseType.damage => Utils.JavaFormat(Utils.GetString("Channeling_for_s1_sec_disrupted_by_taking_damage_d2_times_s3_s4_s5_s6_s7"),
                                     BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
                                     actionDetail3,
-                                    auraActionType.description(),
+                                    auraActionType.Description(),
                                     targetParameter.BuildTargetClause(),
                                     BuildExpression(level, RoundingMode.UP, property),
-                                    percentModifier.description(),
-                                    auraType.description()),
+                                    percentModifier.Description(),
+                                    auraType.Description()),
             _ => base.LocalizedDetail(level, property),
         };
     }

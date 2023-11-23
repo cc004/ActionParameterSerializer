@@ -146,12 +146,12 @@ return new ExConditionPassiveAction();*/
         {
             this.value = value;
             this.index = index;
-            description = index.description();
+            description = index.Description();
         }
 
         public string ValueString()
         {
-            return Utils.roundIfNeed(value);
+            return Utils.RoundIfNeed(value);
         }
     }
 
@@ -322,7 +322,7 @@ return new ExConditionPassiveAction();*/
 
         property ??= new Property();
 
-        if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_EXPRESSION)
+        if (UserSettings.Get().GetExpression() == UserSettings.EXPRESSION_EXPRESSION)
         {
             StringBuilder expression = new();
             foreach (ActionValue value in actionValues)
@@ -363,13 +363,13 @@ return new ExConditionPassiveAction();*/
                         }
                         else if (initialValue == 0 || perLevelValue == 0)
                         {
-                            part.Append(Utils.JavaFormat(" * %s", value.key.description()));
+                            part.Append(Utils.JavaFormat(" * %s", value.key.Description()));
                         }
                         else
                         {
                             string c = part.ToString();
                             part.Clear();
-                            part.Append(Utils.JavaFormat("(%s) * %s", c, value.key.description()));
+                            part.Append(Utils.JavaFormat("(%s) * %s", c, value.key.Description()));
                         }
                     }
                 }
@@ -388,7 +388,7 @@ return new ExConditionPassiveAction();*/
                 return hasBracesIfNeeded ? BracesIfNeeded(expression.ToString()) : expression.ToString();
             }
         }
-        else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL && !isConstant)
+        else if (UserSettings.Get().GetExpression() == UserSettings.EXPRESSION_ORIGINAL && !isConstant)
         {
             StringBuilder expression = new();
             foreach (ActionValue value in actionValues)
@@ -430,13 +430,13 @@ return new ExConditionPassiveAction();*/
                         }
                         else if (initialValue == 0 || perLevelValue == 0)
                         {
-                            part.Append(Utils.JavaFormat(" * %s", value.key.description()));
+                            part.Append(Utils.JavaFormat(" * %s", value.key.Description()));
                         }
                         else
                         {
                             string c = part.ToString();
                             part.Clear();
-                            part.Append(Utils.JavaFormat("(%s) * %s", c, value.key.description()));
+                            part.Append(Utils.JavaFormat("(%s) * %s", c, value.key.Description()));
                         }
                     }
                 }
@@ -469,7 +469,7 @@ return new ExConditionPassiveAction();*/
                 }
                 if (value.key != null)
                 {
-                    part *= ((property.getItem(value.key)));
+                    part *= ((property.GetItem(value.key)));
                 }
                 //                int num = (int)part;
                 //                if (UnitUtils.Companion.approximately(part, (double)num)) {

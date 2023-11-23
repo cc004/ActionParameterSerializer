@@ -13,32 +13,26 @@ public class PassiveAction : ActionParameter
     public
     override void ChildInit()
     {
-        switch (actionDetail1)
+        propertyKey = actionDetail1 switch
         {
-            case 1:
-                propertyKey = PropertyKey.hp; break;
-            case 2:
-                propertyKey = PropertyKey.atk; break;
-            case 3:
-                propertyKey = PropertyKey.def; break;
-            case 4:
-                propertyKey = PropertyKey.magicStr; break;
-            case 5:
-                propertyKey = PropertyKey.magicDef; break;
-            default:
-                propertyKey = PropertyKey.unknown; break;
-        }
+            1 => PropertyKey.hp,
+            2 => PropertyKey.atk,
+            3 => PropertyKey.def,
+            4 => PropertyKey.magicStr,
+            5 => PropertyKey.magicDef,
+            _ => PropertyKey.unknown,
+        };
         actionValues.Add(new ActionValue(actionValue2, actionValue3, null));
     }
 
     public
     override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Raise_s1_s2"), BuildExpression(level, property), propertyKey.description());
+        return Utils.JavaFormat(Utils.GetString("Raise_s1_s2"), BuildExpression(level, property), propertyKey.Description());
     }
 
-    public Property propertyItem(int level)
+    public Property PropertyItem(int level)
     {
-        return Property.getPropertyWithKeyAndValue(null, propertyKey, actionValue2.value + actionValue3.value * level);
+        return Property.GetPropertyWithKeyAndValue(null, propertyKey, actionValue2.value + actionValue3.value * level);
     }
 }

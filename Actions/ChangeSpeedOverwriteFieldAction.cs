@@ -27,8 +27,8 @@ public class ChangeSpeedOverwriteFieldAction : ActionParameter
     {
         return Utils.JavaFormat(Utils.GetString("Deploys_a_filed_of_radius_d1_which_s2_attack_speed_of_s3_for_s4_sec"),
                 (int)actionValue5.value,
-                speedChangeType.description(),
-                Utils.roundDouble(double.Parse(BuildExpression(level, RoundingMode.UNNECESSARY, property, true)) * 100),
+                speedChangeType.Description(),
+                Utils.RoundDouble(double.Parse(BuildExpression(level, RoundingMode.UNNECESSARY, property, true)) * 100),
                 BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

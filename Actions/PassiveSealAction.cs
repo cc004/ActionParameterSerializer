@@ -23,8 +23,8 @@ internal class PassiveSealAction : ActionParameter
     {
         return Utils.JavaFormat(Utils.GetString("Passive_Whenever_s1_get_s2_seals_s3_with_d4_marks_id_d5_for_s6_sec_caps_at_d7_This_passive_skill_will_listen_for_s8_sec"),
                 targetParameter.BuildTargetClause(),
-                passiveTiming.description(),
-                sealTarget.description(),
+                passiveTiming.Description(),
+                sealTarget.Description(),
                 actionDetail2,
                 (int)actionValue2.value,
                 BuildExpression(level, sealDuration, RoundingMode.UNNECESSARY, property),

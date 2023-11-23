@@ -36,7 +36,7 @@ public class LogBarrierAction : ActionParameter
     {
         return Utils.JavaFormat(Utils.GetString("Cast_a_barrier_on_s1_to_reduce_damage_over_s2_with_coefficient_s3_the_greater_the_less_reduced_amount_for_s4_s"),
                 targetParameter.BuildTargetClause(),
-                Utils.roundDouble(actionValue5.value),
+                Utils.RoundDouble(actionValue5.value),
                 BuildExpression(level, RoundingMode.UNNECESSARY, property),
                 BuildExpression(level, durationValues, null, property));
     }

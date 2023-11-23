@@ -16,9 +16,9 @@ public class ChangeEnergyRecoveryRatioByDamageAction : ActionParameter
         base.ChildInit();
     }
 
-    public string getChildrenActionString()
+    public static string GetChildrenActionString()
     {
-        StringBuilder childrenActionString = new StringBuilder();
+        StringBuilder childrenActionString = new();
         // TODO
         /*
         if (childrenAction != null) {
@@ -34,7 +34,7 @@ public class ChangeEnergyRecoveryRatioByDamageAction : ActionParameter
     override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("change_energy_recovery_ratio_of_action_s1_to_s2_when_s3_get_damage"),
-                getChildrenActionString(),
+                GetChildrenActionString(),
                 actionValue1.ValueString(),
                 targetParameter.BuildTargetClause());
     }

@@ -34,6 +34,6 @@ public class HealAction : ActionParameter
     public
     override string LocalizedDetail(int level, Property property)
     {
-        return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_HP"), targetParameter.BuildTargetClause(), BuildExpression(level, null, null, property, true, false, false), percentModifier.description());
+        return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_HP"), targetParameter.BuildTargetClause(), BuildExpression(level, null, null, property, true, false, false), percentModifier.Description());
     }
 }

@@ -83,5 +83,16 @@ public enum ActionType
     effectAction = 94,
     spyAction = 95,
     changeEnergyFieldAction = 96,
-    changeEnergyByDamageAction = 97
+    changeEnergyByDamageAction = 97,
+    energyDamageReduce = 98,
+    chaangeSpeedOverwriteField = 99,
+    unableStateGuard = 100,
+    attackSealForAllEnemy = 101,
+    accumulativeDamageForAllEnemy = 102,
+    copyAtkParam = 103,
+    everyAttackCritical = 104,
+    environment = 105,
+    protect = 106,
+    changeCriticalReference = 107,
+    ifContainsUnitGroup = 108,
 }

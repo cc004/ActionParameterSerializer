@@ -31,20 +31,17 @@ public class InhibitHealAction : ActionParameter
     public
     override string LocalizedDetail(int level, Property property)
     {
-        switch (inhibitType)
+        return inhibitType switch
         {
-            case InhibitType.inhibit:
-                return Utils.JavaFormat(Utils.GetString("When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field"),
-                        targetParameter.BuildTargetClause(),
-                        actionValue1.ValueString(),
-                        BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
-            case InhibitType.decrease:
-                return Utils.JavaFormat(Utils.GetString("Decreases_s1_healing_received_by_s2_last_for_s3_sec_or_unlimited_time_if_triggered_by_field"),
-                        Utils.roundIfNeed(actionValue1.value * 100),
-                        targetParameter.BuildTargetClause(),
-                        BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
-            default:
-                return base.LocalizedDetail(level, property);
-        }
+            InhibitType.inhibit => Utils.JavaFormat(Utils.GetString("When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field"),
+                                    targetParameter.BuildTargetClause(),
+                                    actionValue1.ValueString(),
+                                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)),
+            InhibitType.decrease => Utils.JavaFormat(Utils.GetString("Decreases_s1_healing_received_by_s2_last_for_s3_sec_or_unlimited_time_if_triggered_by_field"),
+                                    Utils.RoundIfNeed(actionValue1.value * 100),
+                                    targetParameter.BuildTargetClause(),
+                                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

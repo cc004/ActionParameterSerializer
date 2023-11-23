@@ -37,23 +37,21 @@ public class ActionByHitCountAction : ActionParameter
         string limitation;
         if (actionValue5.value > 0)
         {
-            limitation = Utils.JavaFormat(Utils.GetString("max_s_times"), Utils.roundIfNeed(actionValue5.value));
+            limitation = Utils.JavaFormat(Utils.GetString("max_s_times"), Utils.RoundIfNeed(actionValue5.value));
         }
         else
         {
             limitation = "";
         }
-        switch (conditionType)
+        return conditionType switch
         {
-            case ConditionType.hit:
-                return Utils.JavaFormat(Utils.GetString("Use_d1_s2_every_s3_hits_in_next_s4_sec"),
-                    actionDetail2 % 10,
-                    limitation,
-                    Utils.roundIfNeed(actionValue1.value),
-                    BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
-                );
-            default:
-                return base.LocalizedDetail(level, property);
-        }
+            ConditionType.hit => Utils.JavaFormat(Utils.GetString("Use_d1_s2_every_s3_hits_in_next_s4_sec"),
+                                actionDetail2 % 10,
+                                limitation,
+                                Utils.RoundIfNeed(actionValue1.value),
+                                BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
+                            ),
+            _ => base.LocalizedDetail(level, property),
+        };
     }
 }

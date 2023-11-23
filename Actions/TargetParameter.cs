@@ -44,7 +44,7 @@ public class TargetParameter
     private bool HasDependAction()
     {
         return dependAction != null && (
-            dependAction.getActionId() != 0
+            SkillAction.GetActionId() != 0
             && targetType != TargetType.absolute
             && dependAction.parameter.actionType != ActionType.chooseArea
         );
@@ -65,13 +65,13 @@ public class TargetParameter
                 || targetNumber == TargetNumber.fifth;
         hasDirectionPhrase = direction == DirectionType.front
                 && (hasRangePhrase || targetCount == TargetCount.all);
-        hasTargetType = !(targetType.exclusiveWithAll() == ExclusiveAllType.exclusive && targetCount == TargetCount.all);
+        hasTargetType = !(targetType.ExclusiveWithAll() == ExclusiveAllType.exclusive && targetCount == TargetCount.all);
     }
 
 
     public string BuildTargetClause(bool anyOfModifier)
     {
-        if (targetCount.pluralModifier() == PluralModifier.many && anyOfModifier)
+        if (targetCount.PluralModifier() == PluralModifier.many && anyOfModifier)
         {
             return Utils.JavaFormat(Utils.GetString("any_of_s"), BuildTargetClause());
         }
@@ -87,16 +87,16 @@ public class TargetParameter
         {
             if (dependAction.parameter.actionType == ActionType.damage)
             {
-                return Utils.JavaFormat(Utils.GetString("targets_those_damaged_by_effect_d"), dependAction.getActionId() % 100);
+                return Utils.JavaFormat(Utils.GetString("targets_those_damaged_by_effect_d"), SkillAction.GetActionId() % 100);
             }
             else
             {
-                return Utils.JavaFormat(Utils.GetString("targets_of_effect_d"), dependAction.getActionId() % 100);
+                return Utils.JavaFormat(Utils.GetString("targets_of_effect_d"), SkillAction.GetActionId() % 100);
             }
         }
         else if (!hasRelationPhrase)
         {
-            return targetType.description();
+            return targetType.Description();
         }
         else if (!hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase)
         {
@@ -106,29 +106,29 @@ public class TargetParameter
         {
             if (targetCount == TargetCount.all)
             {
-                if (targetType.exclusiveWithAll() == ExclusiveAllType.exclusive)
+                if (targetType.ExclusiveWithAll() == ExclusiveAllType.exclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("all_s_targets"), targetAssignment.description());
+                    return Utils.JavaFormat(Utils.GetString("all_s_targets"), targetAssignment.Description());
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.not)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.not)
                 {
-                    return Utils.JavaFormat(Utils.GetString("all_s_s_targets"), targetAssignment.description(), targetType.description());
+                    return Utils.JavaFormat(Utils.GetString("all_s_s_targets"), targetAssignment.Description(), targetType.Description());
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.halfExclusive)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.halfExclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("all_s_targets"), targetAssignment.description()) + Utils.JavaFormat(Utils.GetString("except_self"));
+                    return Utils.JavaFormat(Utils.GetString("all_s_targets"), targetAssignment.Description()) + Utils.JavaFormat(Utils.GetString("except_self"));
                 }
             }
-            else if (targetCount == TargetCount.one && targetType.ignoresOne())
+            else if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s_s_target"), targetType.description(), targetAssignment.description());
+                return Utils.JavaFormat(Utils.GetString("s_s_target"), targetType.Description(), targetAssignment.Description());
             }
             else
             {
-                return Utils.JavaFormat(Utils.GetString("s_s_s"), targetType.description(), targetAssignment.description(), targetCount.description());
+                return Utils.JavaFormat(Utils.GetString("s_s_s"), targetType.Description(), targetAssignment.Description(), targetCount.Description());
             }
         }
-        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.exclusive)
+        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.ExclusiveWithAll() == ExclusiveAllType.exclusive)
         {
             return targetAssignment switch
             {
@@ -137,16 +137,16 @@ public class TargetParameter
                 _ => Utils.JavaFormat(Utils.GetString("all_front_targets")),
             };
         }
-        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.not)
+        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.ExclusiveWithAll() == ExclusiveAllType.not)
         {
             return targetAssignment switch
             {
-                TargetAssignment.enemy => Utils.JavaFormat(Utils.GetString("all_front_s_enemy_targets"), targetType.description()),
-                TargetAssignment.friendly => Utils.JavaFormat(Utils.GetString("all_front_including_self_s_friendly_targets"), targetType.description()),
-                _ => Utils.JavaFormat(Utils.GetString("all_front_s_targets"), targetType.description()),
+                TargetAssignment.enemy => Utils.JavaFormat(Utils.GetString("all_front_s_enemy_targets"), targetType.Description()),
+                TargetAssignment.friendly => Utils.JavaFormat(Utils.GetString("all_front_including_self_s_friendly_targets"), targetType.Description()),
+                _ => Utils.JavaFormat(Utils.GetString("all_front_s_targets"), targetType.Description()),
             };
         }
-        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.exclusiveWithAll() == ExclusiveAllType.halfExclusive)
+        else if (hasCountPhrase && !hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase && targetType.ExclusiveWithAll() == ExclusiveAllType.halfExclusive)
         {
             return targetAssignment switch
             {
@@ -157,11 +157,11 @@ public class TargetParameter
         }
         else if (!hasCountPhrase && !hasNthModifier && hasRangePhrase && hasRelationPhrase && !hasDirectionPhrase)
         {
-            return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.description(), targetRange.rawRange);
+            return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.Description(), targetRange.rawRange);
         }
         else if (!hasCountPhrase && !hasNthModifier && hasRangePhrase && hasRelationPhrase && hasDirectionPhrase)
         {
-            return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.description(), targetRange.rawRange);
+            return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.Description(), targetRange.rawRange);
         }
         else if (!hasCountPhrase && hasNthModifier && hasRangePhrase && hasRelationPhrase)
         {
@@ -171,93 +171,93 @@ public class TargetParameter
         {
             if (targetCount == TargetCount.all)
             {
-                if (targetType.exclusiveWithAll() == ExclusiveAllType.exclusive)
+                if (targetType.ExclusiveWithAll() == ExclusiveAllType.exclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.description(), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.Description(), targetRange.rawRange);
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.not)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.not)
                 {
-                    return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetAssignment.description(), targetType.description(), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetAssignment.Description(), targetType.Description(), targetRange.rawRange);
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.halfExclusive)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.halfExclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.description() + Utils.JavaFormat(Utils.GetString("except_self")), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("s1_targets_in_range_d2"), targetAssignment.Description() + Utils.JavaFormat(Utils.GetString("except_self")), targetRange.rawRange);
                 }
             }
-            else if (targetCount == TargetCount.one && targetType.ignoresOne())
+            else if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetType.description(), targetAssignment.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetType.Description(), targetAssignment.Description(), targetRange.rawRange);
             }
             else
             {
-                return Utils.JavaFormat(Utils.GetString("s1_s2_s3_in_range_d4"), targetType.description(), targetAssignment.description(), targetCount.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_s2_s3_in_range_d4"), targetType.Description(), targetAssignment.Description(), targetCount.Description(), targetRange.rawRange);
             }
         }
         else if (hasCountPhrase && !hasNthModifier && hasRangePhrase && hasRelationPhrase && hasDirectionPhrase)
         {
             if (targetCount == TargetCount.all)
             {
-                if (targetType.exclusiveWithAll() == ExclusiveAllType.exclusive)
+                if (targetType.ExclusiveWithAll() == ExclusiveAllType.exclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.description(), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.Description(), targetRange.rawRange);
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.not)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.not)
                 {
-                    return Utils.JavaFormat(Utils.GetString("front_s1_s2_targets_in_range_d3"), targetAssignment.description(), targetType.description(), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("front_s1_s2_targets_in_range_d3"), targetAssignment.Description(), targetType.Description(), targetRange.rawRange);
                 }
-                else if (targetType.exclusiveWithAll() == ExclusiveAllType.halfExclusive)
+                else if (targetType.ExclusiveWithAll() == ExclusiveAllType.halfExclusive)
                 {
-                    return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.description() + Utils.JavaFormat(Utils.GetString("except_self")), targetRange.rawRange);
+                    return Utils.JavaFormat(Utils.GetString("front_s1_targets_in_range_d2"), targetAssignment.Description() + Utils.JavaFormat(Utils.GetString("except_self")), targetRange.rawRange);
                 }
             }
-            else if (targetCount == TargetCount.one && targetType.ignoresOne())
+            else if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s1_front_s2_target_in_range_d3"), targetType.description(), targetAssignment.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_front_s2_target_in_range_d3"), targetType.Description(), targetAssignment.Description(), targetRange.rawRange);
             }
             else
             {
-                return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3_in_range_d4"), targetType.description(), targetAssignment.description(), targetCount.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3_in_range_d4"), targetType.Description(), targetAssignment.Description(), targetCount.Description(), targetRange.rawRange);
             }
         }
         else if (hasCountPhrase && hasNthModifier && !hasRangePhrase && hasRelationPhrase && !hasDirectionPhrase)
         {
-            if (targetCount == TargetCount.one && targetType.ignoresOne())
+            if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s_s_target"), targetType.description(targetNumber, null), targetAssignment.description());
+                return Utils.JavaFormat(Utils.GetString("s_s_target"), targetType.Description(targetNumber, null), targetAssignment.Description());
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
-                return Utils.JavaFormat(Utils.GetString("s_s_s"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description());
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.Description(), GetUntilNumber().Description());
+                return Utils.JavaFormat(Utils.GetString("s_s_s"), targetType.Description(targetNumber, modifier), targetAssignment.Description(), targetCount.PluralModifier().Description());
             }
         }
         else if (hasCountPhrase && hasNthModifier && !hasRangePhrase && hasRelationPhrase && hasDirectionPhrase)
         {
-            string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
-            return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description());
+            string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.Description(), GetUntilNumber().Description());
+            return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3"), targetType.Description(targetNumber, modifier), targetAssignment.Description(), targetCount.PluralModifier().Description());
         }
         else if (hasCountPhrase && hasNthModifier && hasRangePhrase && hasRelationPhrase && !hasDirectionPhrase)
         {
-            if (targetCount == TargetCount.one && targetType.ignoresOne())
+            if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetType.description(targetNumber, null), targetAssignment.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_s2_target_in_range_d3"), targetType.Description(targetNumber, null), targetAssignment.Description(), targetRange.rawRange);
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
-                return Utils.JavaFormat(Utils.GetString("s1_s2_s3_in_range_d4"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description(), targetRange.rawRange);
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.Description(), GetUntilNumber().Description());
+                return Utils.JavaFormat(Utils.GetString("s1_s2_s3_in_range_d4"), targetType.Description(targetNumber, modifier), targetAssignment.Description(), targetCount.PluralModifier().Description(), targetRange.rawRange);
             }
         }
         else if (hasCountPhrase && hasNthModifier && hasRangePhrase && hasRelationPhrase && hasDirectionPhrase)
         {
-            if (targetCount == TargetCount.one && targetType.ignoresOne())
+            if (targetCount == TargetCount.one && targetType.IgnoresOne())
             {
-                return Utils.JavaFormat(Utils.GetString("s1_front_s2_target_in_range_d3"), targetType.description(targetNumber, null), targetAssignment.description(), targetRange.rawRange);
+                return Utils.JavaFormat(Utils.GetString("s1_front_s2_target_in_range_d3"), targetType.Description(targetNumber, null), targetAssignment.Description(), targetRange.rawRange);
             }
             else
             {
-                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.description(), GetUntilNumber().description());
-                return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3_in_range_d4"), targetType.description(targetNumber, modifier), targetAssignment.description(), targetCount.pluralModifier().description(), targetRange.rawRange);
+                string modifier = Utils.JavaFormat(Utils.GetString("s1_to_s2"), targetNumber.Description(), GetUntilNumber().Description());
+                return Utils.JavaFormat(Utils.GetString("s1_front_s2_s3_in_range_d4"), targetType.Description(targetNumber, modifier), targetAssignment.Description(), targetCount.PluralModifier().Description(), targetRange.rawRange);
             }
         }
         return "";

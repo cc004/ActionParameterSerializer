@@ -48,7 +48,7 @@ public class RegenerationAction : ActionParameter
         return Utils.JavaFormat(Utils.GetString("Restore_s1_s2_s3_per_second_for_s4_sec"),
                 targetParameter.BuildTargetClause(),
                 BuildExpression(level, property),
-                regenerationType.description(),
+                regenerationType.Description(),
                 BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

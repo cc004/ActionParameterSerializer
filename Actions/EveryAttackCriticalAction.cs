@@ -26,7 +26,7 @@ public class EveryAttackCriticalAction : ActionParameter
     public override string LocalizedDetail(int level, Property property)
     {
         return Utils.JavaFormat(Utils.GetString("Enchant_self_with_s1_attack_critical_for_s2_sec"),
-             atkType.description(),
+             atkType.Description(),
             BuildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
     }
 }

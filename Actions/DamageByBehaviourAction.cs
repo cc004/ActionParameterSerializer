@@ -32,7 +32,7 @@ internal class DamageByBehaviourAction : ActionParameter
         if (dmgType != EDamageType.normal)
         {
             dmg = Utils.JavaFormat(Utils.GetString("s1_percent_of_s2_with_max_d3"), 
-                dmg, dmgType.description(), actionValue5.value);
+                dmg, dmgType.Description(), actionValue5.value);
         }
         else
         {
@@ -41,7 +41,7 @@ internal class DamageByBehaviourAction : ActionParameter
 
         return Utils.JavaFormat(Utils.GetString("s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds"),
                 targetParameter.BuildTargetClause(),
-                ailment.description(),
+                ailment.Description(),
                 dmg,
                 BuildExpression(level, durationValues, RoundingMode.HALF_UP, property));
     }

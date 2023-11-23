@@ -21,7 +21,7 @@ public class IfForChildrenAction : ActionParameter
             if (Enum.IsDefined(ifType))
             {
                 trueClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_s3"),
-                        actionDetail2 % 100, targetParameter.BuildTargetClause(true), ifType.description());
+                        actionDetail2 % 100, targetParameter.BuildTargetClause(true), ifType.Description());
             }
             else
             {
@@ -76,7 +76,7 @@ public class IfForChildrenAction : ActionParameter
                 {
                     var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
                     trueClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_enabled"),
-                        actionDetail2 % 10, env.description());
+                        actionDetail2 % 10, env.Description());
                 }
                 else if (actionDetail1 >= 1600)
                 {
@@ -94,7 +94,7 @@ public class IfForChildrenAction : ActionParameter
                 {
                     var env = (EnvironmentAction.EnvironmentType)(actionDetail1 - 3000);
                     falseClause = Utils.JavaFormat(Utils.GetString("use_d1_if_s2_environment_not_enabled"),
-                        actionDetail2 % 10, env.description());
+                        actionDetail2 % 10, env.Description());
                 }
                 else if (actionDetail1 >= 1600)
                 {
@@ -117,7 +117,7 @@ public class IfForChildrenAction : ActionParameter
             if (Enum.IsDefined(ifType))
             {
                 falseClause = Utils.JavaFormat(Utils.GetString("use_d1_to_s2_if_not_s3"),
-                        actionDetail3 % 100, targetParameter.BuildTargetClause(true), ifType.description());
+                        actionDetail3 % 100, targetParameter.BuildTargetClause(true), ifType.Description());
             }
             else
             {

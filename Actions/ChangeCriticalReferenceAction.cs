@@ -28,7 +28,7 @@ public class ChangeCriticalReferenceAction : ActionParameter
         if (refType == ECriticalReference.normal)
             return Utils.GetString("no_effect");
         return Utils.JavaFormat(Utils.GetString("Use_critical_reference_s1_for_skill_d2"),
-            refType.rawDescription(),
+            refType.RawDescription(),
             actionId);
     }
 }
